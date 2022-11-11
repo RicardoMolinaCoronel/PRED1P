@@ -73,8 +73,11 @@ package tdas;
         arreglo[ultimo+1]=null;
         return true;
     }
-        /* public E get(int p){
+        public E get(int p){
+            if(p<=0 || p>ultimo){
+                throw new ArrayIndexOutOfBoundsException();
+            }
         return arreglo[p];
-    } */
+    } 
   
 }
