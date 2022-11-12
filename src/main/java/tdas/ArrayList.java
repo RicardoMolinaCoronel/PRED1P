@@ -5,14 +5,77 @@
  */
 package tdas;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Comparator;
+
+
 /**
  *
  * @author Ricardo
  * @param <E>
  */
-    public class ArrayList<E> implements List<E>{
+    public class ArrayList<E> implements List<E>,Iterable<E>{
   private E[] arreglo;
   private int ultimo,capacidad;
+  
+  
+  public E findFirstElement(ArrayList<E> cl, Comparator<E> cmp, E anotherElement){
+        for (E element : cl) {
+        if (cmp.compare(element, anotherElement) == 0) {
+             return element;
+        }
+    }
+        return null;
+    }
+    
+    public ArrayList<E> findAll (ArrayList<E> elements, Comparator cmp, E anotherElement) {
+    ArrayList<E> results = new ArrayList();
+    for (E element : elements) {
+        if (cmp.compare(element, anotherElement) == 0) {
+             results.addLast(element);
+        }
+    }
+    return results; 
+}
+  
+    public boolean addLast(E e){
+        try{
+        if(capacidad==ultimo+1){
+            crecerArreglo();
+        }
+        ultimo+=1;
+        arreglo[ultimo]=e; 
+        return true;
+       }catch(Exception ex){
+           return false;
+       }
+    }
+   @Override
+    public Iterator<E> iterator() {
+        
+        Iterator<E> it=new Iterator<E>(){
+            
+            int i=0;
+            E puntero= arreglo[i];
+            
+            @Override
+            public boolean hasNext() {
+                return i < arreglo.length && arreglo[i] != null;
+            }
+
+            @Override
+            public E next() {
+                if (!hasNext()) {throw new NoSuchElementException();}
+                
+                return arreglo[i++];
+ 
+            }
+        
+    };
+        
+        return it;
+    }
     public ArrayList() {
         capacidad=10;
         arreglo = (E[]) new Object[capacidad];
@@ -78,6 +141,24 @@ package tdas;
                 throw new ArrayIndexOutOfBoundsException();
             }
         return arreglo[p];
-    } 
+    }
+    
+        @Override
+    public boolean contains(E e) {
+        if(e==null){
+            return false;
+        }
+        for(E tmp:arreglo){
+            if(e.equals(tmp)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public String toString(){
+         return arreglo.toString();
+    }
   
 }

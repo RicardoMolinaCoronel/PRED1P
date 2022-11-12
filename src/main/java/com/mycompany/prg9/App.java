@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import tdas.ArrayList;
 
 /**
  * JavaFX App
@@ -20,7 +21,12 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.show();
-        System.out.println("Agregando Algo");
+        ArrayList<String> ar= new ArrayList<>();
+        ar.add("a");
+        for(String c:ar){
+                    System.out.println(c);
+
+        }
     }
 
     static void setRoot(String fxml) throws IOException {

@@ -13,7 +13,25 @@ import java.util.Iterator;
  * @author Ricardo
  */
 public class DoubleLinkedCircularList<E> implements Iterable<E>{
-     @Override
+    
+    
+   
+    public int indexOf(E e) {
+        Nodo<E> temp = primero.siguiente;
+        int c = 0;
+        while (c < size) {
+            if (temp.contenido.equals(e)) {
+                return c;
+            }
+            temp = temp.siguiente;
+            c++;
+        }
+        return -1;
+    }
+    public boolean contains(E e) {
+        return !(indexOf(e) == -1);
+    }
+    @Override
     public Iterator<E> iterator() {
 return new IteratorCL(this);
     }
@@ -53,7 +71,7 @@ return new IteratorCL(this);
     }
      
      //Saber el tamaño de la lista de nodos
-    public int longitud() {
+    public int length() {
         return size;
     }
     //Conocer si la lista esta vacía
@@ -119,7 +137,7 @@ return new IteratorCL(this);
     }
     //Añadir un nodo por indice;
     public boolean add(int indice, E e) {
-        if (indice < 0 || indice > longitud()) {
+        if (indice < 0 || indice > length()) {
             throw new IndexOutOfBoundsException();
         }
         if (e == null) {
@@ -130,7 +148,7 @@ return new IteratorCL(this);
 
         if (indice == 0) {
             return addFirst(e);
-        } else if (indice == longitud() || indice == longitud() -1 ) {
+        } else if (indice == length() || indice == length() -1 ) {
             return addLast(e);
         } else {
             for (int i = 0; i < indice - 1; i++) {
@@ -177,7 +195,7 @@ return new IteratorCL(this);
         Nodo<E> tmp= new Nodo();
         actual = primero;
         //previo = ultimo;
-        if(indice< 0 || indice>longitud()-1){
+        if(indice< 0 || indice>length()-1){
             throw new IndexOutOfBoundsException();
         }
         do{
@@ -221,13 +239,13 @@ return new IteratorCL(this);
         if (estaVacia()) {
             return null;
         }
-        if (indice < 0 || indice > longitud() - 1) {
+        if (indice < 0 || indice > length() - 1) {
             return null;
         }
         if (indice == 0) {
             return ultimo.contenido;
         }
-        if (indice == longitud() - 1) {
+        if (indice == length() - 1) {
             return primero.contenido;
         }
         Nodo<E> tmp = primero;

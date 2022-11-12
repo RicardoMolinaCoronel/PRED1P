@@ -14,4 +14,7 @@ public interface List<E> {
     boolean isEmpty();
     boolean add(int indice, E e);
   boolean remove(int indice);
+  boolean contains(E e);
+  boolean addLast(E e);
+  E get(int indice);
 }
