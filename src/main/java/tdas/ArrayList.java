@@ -38,7 +38,17 @@ import java.util.Comparator;
     }
     return results; 
 }
-  
+     public boolean addFirst(E e){
+         if(ultimo+1==capacidad){
+            crecerArreglo();
+        }
+        ultimo+=1;        
+        for(int x=ultimo;x>0;x--){
+        arreglo[x]=arreglo[x-1];        
+        }
+        arreglo[0]=e;        
+        return true; 
+     }
     public boolean addLast(E e){
         try{
         if(capacidad==ultimo+1){
