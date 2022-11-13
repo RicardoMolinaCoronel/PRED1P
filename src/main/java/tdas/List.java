@@ -17,4 +17,6 @@ public interface List<E> {
   boolean contains(E e);
   boolean addLast(E e);
   E get(int indice);
+  int indexOf(E e);
+  int size();
 }
