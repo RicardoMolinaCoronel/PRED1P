@@ -37,6 +37,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("pruebaPrincipal"), 640, 480);
+        scene.getStylesheets().add("com/mycompany/prg9/css/InterfazCSS.css");
         stage.setTitle("Game Store");
         stage.setScene(scene);
         stage.show();

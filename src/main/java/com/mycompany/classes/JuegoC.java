@@ -27,7 +27,8 @@ public class JuegoC implements Serializable{
     public JuegoC(String nombre) {
         this.nombre = nombre;
     }
-    /*
+    public JuegoC(){}
+    
     public JuegoC(String nombre, String desarrollador, String fecha,String genero ,String descripcion) {
         this.nombre = nombre;
         this.desarrollador = desarrollador;
@@ -65,7 +66,7 @@ public class JuegoC implements Serializable{
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }*/
+    }
     public JuegoC(JuegoC juegoProbar) {
         nombre = juegoProbar.nombre;
     }
@@ -112,7 +113,7 @@ public class JuegoC implements Serializable{
             String linea;
             while((linea=bufferedReader.readLine())!=null){
                 String []info = linea.split(";");
-                JuegoC juego = new JuegoC(info[0]);
+                JuegoC juego = new JuegoC(info[0],info[1],info[2],info[3],info[4]);
                 listaJuego.addLast(juego);
             }
         }catch (IOException ex) { 

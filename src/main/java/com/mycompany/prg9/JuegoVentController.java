@@ -7,6 +7,7 @@ package com.mycompany.prg9;
 import com.mycompany.classes.Album;
 import com.mycompany.classes.BibliotecaJuegos;
 import com.mycompany.classes.Foto;
+import com.mycompany.classes.JuegoC;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import tdas.ArrayList;
 import tdas.IteratorCL;
 
 /**
@@ -36,13 +38,13 @@ public class JuegoVentController {
     @FXML
     private Text nJuego;
     @FXML
-    private Text  nAnio;
+    private Text nAnio;
     @FXML
-    private Text  nDesarrollador;
+    private Text nDesarrollador;
     @FXML
-    private Text  nDescripcion;
+    private Text nDescripcion;
     @FXML
-    private Text  nGenero;
+    private Text nGenero;
     @FXML
     private Button btnAnt;
     @FXML
@@ -52,7 +54,7 @@ public class JuegoVentController {
     @FXML
     private Button btnRegresar;
     private static Foto fotoSeleccionada = new Foto();
-
+    public static JuegoC juego = new JuegoC();
     private static Album albumSeleccionado = new Album();
     private IteratorCL<Foto> iterador;
     private Iterator<Album> iteradorAlbum;
@@ -60,9 +62,10 @@ public class JuegoVentController {
     /**
      * Initializes the controller class.
      */
-
     public void initialize() throws FileNotFoundException, IOException {
         colocarImagenBoton();
+        //System.out.println(BibliotecaJuegos.getAlbumSelec().getNombre());
+        leerJuego();
         /*
         nJuego.setDisable(true);
         nAnio.setDisable(true);
@@ -80,7 +83,11 @@ public class JuegoVentController {
             btnSig.setVisible(true);
         }
         cargarFotos(BibliotecaJuegos.getAlbumSelec());
-        nJuego.setText(BibliotecaJuegos.getAlbumSelec().getNombre());
+        nJuego.setText(juego.getNombre());
+        nAnio.setText(juego.getFecha());
+        nDesarrollador.setText(juego.getDesarrollador());
+        nGenero.setText(juego.getGenero());
+        nDescripcion.setText(juego.getDescripcion());
 
     }
 
@@ -148,6 +155,14 @@ public class JuegoVentController {
         btnAnt.setGraphic(new ImageView(imgAntes));
         btnSig.setGraphic(new ImageView(imgDespues));
         btnRegresar.setGraphic(new ImageView(imgAtras));
+    }
+
+    public void leerJuego() {
+        for (JuegoC j : juego.lecturaJuego()) {
+            if (j.getNombre().toLowerCase().equals(BibliotecaJuegos.getAlbumSelec().getNombre().toLowerCase())) {
+                juego = new JuegoC(j.getNombre(), j.getDesarrollador(), j.getFecha(), j.getGenero(), j.getDescripcion());
+            }
+        }
     }
 
 }

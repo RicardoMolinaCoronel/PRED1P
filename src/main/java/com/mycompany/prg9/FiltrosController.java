@@ -4,12 +4,17 @@
  */
 package com.mycompany.prg9;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.CheckBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import tdas.*;
 import javafx.scene.layout.VBox;
 
@@ -31,6 +36,8 @@ public class FiltrosController implements Initializable {
     
     @FXML
     private VBox vBGeneros;
+    @FXML
+    private Button btnVolver;
     
     
     public ArrayList<String> crearColeccion(){
@@ -106,8 +113,19 @@ public class FiltrosController implements Initializable {
        llenarCombo();
        llenarComboEstrellas();
        llenarCb();
+       colocarImagenBoton();
     }    
+
+    @FXML
+    private void volver(ActionEvent event) throws IOException{
+        App.setRoot("pruebaPrincipal");
+    }
     
-    
+     private void colocarImagenBoton() {
+       
+        URL linkAtras = getClass().getResource("/com/mycompany/prg9/imagenes/atras.png");
+        Image imgAtras = new Image(linkAtras.toString(), 20, 20, false, true);
+        btnVolver.setGraphic(new ImageView(imgAtras));
+    }
     
 }

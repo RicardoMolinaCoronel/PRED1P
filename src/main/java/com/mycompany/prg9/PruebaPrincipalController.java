@@ -6,25 +6,32 @@ package com.mycompany.prg9;
 
 import com.mycompany.classes.Album;
 import com.mycompany.classes.BibliotecaJuegos;
+import com.mycompany.prg9.App;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.TilePane;
 /**
  * FXML Controller class
  *
@@ -33,20 +40,27 @@ import javafx.scene.layout.VBox;
 public class PruebaPrincipalController implements Initializable {
 
 
+   @FXML
+    private Button filtrar;
     @FXML
     private ScrollPane scrollP;
     @FXML
     private TilePane biblioteca;
+        
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        colocarImagenBoton();
     biblioteca.setAlignment(Pos.CENTER);
         biblioteca.setPadding(new Insets(15, 15, 15, 15));
         biblioteca.setVgap(30);
         biblioteca.setHgap(20);
-        Button bot = new Button("hjhj");
+        scrollP.setFitToWidth(true);
+        scrollP.setContent(biblioteca);
+        
+        //scrollP.backgroundProperty().;
         //scrollP.setContent(biblioteca);
        
        //scrollP.setContent(biblioteca);
@@ -117,7 +131,21 @@ public class PruebaPrincipalController implements Initializable {
            
         }
         // TODO
-    }    
+    } 
+    
+    private void colocarImagenBoton() {
+        URL filtro = getClass().getResource("/com/mycompany/prg9/imagenes/filtrar.png");
+        Image imgFiltro = new Image(filtro.toString(), 20, 20, false, true);
+        filtrar.setGraphic(new ImageView(imgFiltro));
+        
+    }
+
+    @FXML
+    private void filtrarJuego(ActionEvent event) throws IOException{
+        App.setRoot("filtros");
+    }
     
     
 }
+
+

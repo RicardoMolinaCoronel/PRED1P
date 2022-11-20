@@ -11,20 +11,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.JuegoVentController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="split-pane" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.JuegoVentController">
    <content>
-      <BorderPane prefHeight="385.0" prefWidth="587.0">
+      <BorderPane prefHeight="385.0" prefWidth="587.0" styleClass="Pane" stylesheets="@css/InterfazCSS.css">
          <left>
             <VBox prefHeight="210.0" prefWidth="178.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Juego:">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
                   <Text fx:id="nJuego" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font size="25.0" />
+                        <Font size="18.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="15.0" />
@@ -32,7 +32,7 @@
                   </Text>
                   <Label text="Fecha de Publicación:">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <Text fx:id="nAnio" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
@@ -40,22 +40,25 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                      <font>
-                        <Font size="20.0" />
+                        <Font size="13.0" />
                      </font>
                   </Text>
                   <Label text="Género:">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <Text fx:id="nGenero" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="13.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
                   </Text>
                   <Label text="Desarrollador:">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="14.0" />
                      </font>
                   </Label>
                   <Text fx:id="nDesarrollador" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
@@ -63,17 +66,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                      <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <Label text="Descripción:">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Text fx:id="nDescripcion" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-                     <font>
-                        <Font size="20.0" />
+                        <Font size="13.0" />
                      </font>
                   </Text>
                </children>
@@ -82,25 +75,42 @@
                </opaqueInsets>
             </VBox>
          </left>
-         <right>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="btnAnt" mnemonicParsing="false" onAction="#mostrarAnt" />
-                  <ImageView fx:id="ImgMos" fitHeight="209.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="btnSig" mnemonicParsing="false" onAction="#mostrarSig" />
-               </children>
-            </HBox>
-         </right>
          <bottom>
-            <VBox onDragDetected="#mostrarAnt" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+            <VBox onDragDetected="#mostrarAnt" prefHeight="202.0" prefWidth="587.0" BorderPane.alignment="CENTER" />
          </bottom>
          <top>
-            <HBox prefHeight="42.0" prefWidth="587.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="94.0" prefWidth="587.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#regresarMenu" text="Regresar" />
+                  <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#regresarMenu" stylesheets="@css/InterfazCSS.css" text="Volver">
+                     <HBox.margin>
+                        <Insets right="90.0" />
+                     </HBox.margin></Button>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnAnt" mnemonicParsing="false" onAction="#mostrarAnt" />
+                        <ImageView fx:id="ImgMos" fitHeight="209.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="btnSig" mnemonicParsing="false" onAction="#mostrarSig" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </top>
+         <center>
+            <VBox prefHeight="140.0" prefWidth="409.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Descripción:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="nDescripcion" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+         </center>
       </BorderPane>
    </content>
 </ScrollPane>
