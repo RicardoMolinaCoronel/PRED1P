@@ -19,8 +19,11 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import tdas.IteratorCL;
 
 /**
@@ -30,85 +33,121 @@ import tdas.IteratorCL;
  */
 public class JuegoVentController {
 
-
     @FXML
-    private Label nJuego;
+    private Text nJuego;
     @FXML
-    private Label nAnio;
+    private Text  nAnio;
     @FXML
-    private Label nDesarrollador;
+    private Text  nDesarrollador;
     @FXML
-    private Label nDescripcion;
+    private Text  nDescripcion;
+    @FXML
+    private Text  nGenero;
     @FXML
     private Button btnAnt;
     @FXML
     private ImageView ImgMos;
     @FXML
     private Button btnSig;
-     private static Foto fotoSeleccionada=new Foto();
-    
-    private static Album albumSeleccionado=new Album();
+    @FXML
+    private Button btnRegresar;
+    private static Foto fotoSeleccionada = new Foto();
+
+    private static Album albumSeleccionado = new Album();
     private IteratorCL<Foto> iterador;
     private Iterator<Album> iteradorAlbum;
+
     /**
      * Initializes the controller class.
      */
-    
-    public void initialize() throws FileNotFoundException,IOException{
-      cargarFotos(BibliotecaJuegos.getAlbumSelec());
-      nJuego.setText(BibliotecaJuegos.getAlbumSelec().getNombre());
-        System.out.println(fotoSeleccionada.getImagen());
+
+    public void initialize() throws FileNotFoundException, IOException {
+        colocarImagenBoton();
+        /*
+        nJuego.setDisable(true);
+        nAnio.setDisable(true);
+        nDesarrollador.setDisable(true);
+        nDescripcion.setDisable(true);*/
+        if (BibliotecaJuegos.getAlbumSelec().getFotosDelAlbum().length() == 1) {
+            btnAnt.setDisable(true);
+            btnAnt.setVisible(false);
+            btnSig.setDisable(true);
+            btnSig.setVisible(false);
+        } else {
+            btnAnt.setDisable(false);
+            btnAnt.setVisible(true);
+            btnSig.setDisable(false);
+            btnSig.setVisible(true);
         }
-        
-       
-     public static Foto getFoto(){
+        cargarFotos(BibliotecaJuegos.getAlbumSelec());
+        nJuego.setText(BibliotecaJuegos.getAlbumSelec().getNombre());
+
+    }
+
+    public static Foto getFoto() {
         return fotoSeleccionada;
     }
-    
-    public static Album getAlbum(){
+
+    public static Album getAlbum() {
         return albumSeleccionado;
     }
-    public void cargarFotos(Album a) throws IOException{
-       iteradorAlbum=  BibliotecaJuegos.getListaAlbumes().iterator();
-       
-        Album album=new Album();
-                    
-            for(Album al:BibliotecaJuegos.getListaAlbumes()){
-                if(al.equals(a)){
-                    album=al;
-                }
+
+    public void cargarFotos(Album a) throws IOException {
+        iteradorAlbum = BibliotecaJuegos.getListaAlbumes().iterator();
+
+        Album album = new Album();
+
+        for (Album al : BibliotecaJuegos.getListaAlbumes()) {
+            if (al.equals(a)) {
+                album = al;
             }
-            
+        }
+
         mostrarFoto(album);
-        
-        iterador= (IteratorCL<Foto>) albumSeleccionado.getFotosDelAlbum().iterator();
-        
+
+        iterador = (IteratorCL<Foto>) albumSeleccionado.getFotosDelAlbum().iterator();
+
     }
-    
-    public void mostrarFoto(Album a){
-     albumSeleccionado=a;
-        fotoSeleccionada=albumSeleccionado.getFotosDelAlbum().getFirst();
+
+    public void mostrarFoto(Album a) {
+        albumSeleccionado = a;
+        fotoSeleccionada = albumSeleccionado.getFotosDelAlbum().getFirst();
         ImgMos.setImage(fotoSeleccionada.getImagen());
         //ImgMos.setImage(im);
     }
-   
 
     @FXML
     private void mostrarSig() {
-        fotoSeleccionada=iterador.next();
-        
+        fotoSeleccionada = iterador.next();
+
         ImgMos.setImage(fotoSeleccionada.getImagen());
-        
+
     }
-     @FXML
+
+    @FXML
     private void mostrarAnt() {
-        fotoSeleccionada=iterador.previous();
-         //System.out.println(fotoSeleccionada);
+        fotoSeleccionada = iterador.previous();
+        //System.out.println(fotoSeleccionada);
         // System.out.println("hola");
         ImgMos.setImage(fotoSeleccionada.getImagen());
     }
-    
-   
-   
+
+    @FXML
+    private void regresarMenu() throws IOException {
+        App.setRoot("pruebaPrincipal");
+
+    }
+
+    private void colocarImagenBoton() {
+        URL linkAntes = getClass().getResource("/com/mycompany/prg9/imagenes/anterior.png");
+        URL linkDespues = getClass().getResource("/com/mycompany/prg9/imagenes/siguiente-boton.png");
+        URL linkAtras = getClass().getResource("/com/mycompany/prg9/imagenes/atras.png");
+        Image imgAntes = new Image(linkAntes.toString(), 20, 20, false, true);
+        Image imgDespues = new Image(linkDespues.toString(), 20, 20, false, true);
+        Image imgAtras = new Image(linkAtras.toString(), 20, 20, false, true);
+        btnAnt.setGraphic(new ImageView(imgAntes));
+        btnSig.setGraphic(new ImageView(imgDespues));
+        btnRegresar.setGraphic(new ImageView(imgAtras));
+    }
 
 }
