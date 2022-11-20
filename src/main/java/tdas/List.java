@@ -19,4 +19,5 @@ public interface List<E> {
   E get(int indice);
   int indexOf(E e);
   int size();
+  boolean insert(int index, E e);
 }

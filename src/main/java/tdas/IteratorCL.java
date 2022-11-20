@@ -11,13 +11,15 @@ package tdas;
  */
 
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  *
  * @author Ricardo
  */
-public class IteratorCL<E> implements Iterator<E> {
+public class IteratorCL<E> implements Iterator<E>,Serializable {
+    private static final long serialVersionUID = 2766;
     DoubleLinkedCircularList<E> cl;
     Nodo<E> i;
     int p;

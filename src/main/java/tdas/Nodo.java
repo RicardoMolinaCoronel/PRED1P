@@ -5,15 +5,18 @@
  */
 package tdas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo
  */
-public class Nodo<E> {
+public class Nodo<E> implements Serializable{
     E contenido;
     Nodo<E> siguiente;
     Nodo<E> anterior;
     int size = 0;
+    private static final long serialVersionUID = 4443;
 
     public Nodo(E cont) {
         contenido = cont;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.JuegoVentController">
+   <content>
+      <BorderPane prefHeight="385.0" prefWidth="587.0">
+         <left>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="nJuego" text="Label">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="nAnio" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="nDesarrollador" text="Label">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="nDescripcion" text="Label" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </left>
+         <right>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnAnt" mnemonicParsing="false" onAction="#mostrarAnt" text="Button" />
+                  <ImageView fx:id="ImgMos" fitHeight="209.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="btnSig" mnemonicParsing="false" onAction="#mostrarSig" text="Button" />
+               </children>
+            </HBox>
+         </right>
+         <bottom>
+            <VBox onDragDetected="#mostrarAnt" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </content>
+</ScrollPane>

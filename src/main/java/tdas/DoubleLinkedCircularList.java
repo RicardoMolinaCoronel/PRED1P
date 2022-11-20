@@ -5,6 +5,7 @@
  */
 package tdas;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -12,8 +13,8 @@ import java.util.Iterator;
  *
  * @author Ricardo
  */
-public class DoubleLinkedCircularList<E> implements Iterable<E>{
-    
+public class DoubleLinkedCircularList<E> implements Iterable<E>,Serializable{
+    private static final long serialVersionUID = 2222;
     
    
     public int indexOf(E e) {

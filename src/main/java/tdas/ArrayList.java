@@ -5,6 +5,7 @@
  */
 package tdas;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Comparator;
@@ -14,11 +15,12 @@ import java.util.Comparator;
  * @author Ricardo
  * @param <E>
  */
-public class ArrayList<E> implements List<E>, Iterable<E> {
+public class ArrayList<E> implements List<E>, Iterable<E>,Serializable {
 
     private E[] arreglo;
     private int ultimo, capacidad;
     private int tam; // me indica la cantidad de elementos que está ocupando el arreglo
+    private static final long serialVersionUID = 4444;
 
     public E findFirstElement(ArrayList<E> cl, Comparator<E> cmp, E anotherElement) {
         for (E element : cl) {
@@ -201,6 +203,41 @@ public class ArrayList<E> implements List<E>, Iterable<E> {
     // devuelve el valor de casillas ocupadas
     public int size() {
         return tam;
+    }
+    @Override
+    // inserta el elemento en cualquier posicion del arreglo
+    public boolean insert(int index, E e) {
+        
+        if(e==null){
+            return false;
+        }
+        if(index<1 || index>capacidad){
+            return false;
+        }
+        if(index>1 && index<(tam-1)){
+            if (tam + 1 == capacidad) {
+                crecerArreglo();
+            }
+            
+            if (arreglo[index - 1] != null) {
+                for (int i = tam; i >= index; i--) {
+                    arreglo[i] = arreglo[i-1];
+                }
+                arreglo[index-1]=e;
+                return true;
+            }else if (arreglo[index - 1]== null){
+                arreglo[index - 1] = e;
+                return true;
+            }
+
+        }else if(index==1){
+            addFirst(e);
+            return true;
+        }else if(index==(tam+1)){
+            addLast(e);
+            return true;
+        }
+        return false;
     }
 
 }
