@@ -1,0 +1,5 @@
+Luis65;1;30/09/2022;Muy malo y muy caro, no lo vale.
+ratr78;3;05/11/2022;Buen juego aunque le falta mayor optimizción.
+The Banker;2;08/11/2022;Cada que inicio el juego se cierra automáticamente.
+antoniop1997;4;05/11/2022;Se nota el salto de calidad con respecto al anterior fifa.
+konan;1;09/10/2022;Tiene demasiados bugs y en mi computador va a 10 fps, en mi opinión le falta más optimización.

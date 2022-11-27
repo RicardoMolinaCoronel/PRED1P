@@ -6,6 +6,7 @@ package com.mycompany.prg9;
 
 import com.mycompany.classes.Album;
 import com.mycompany.classes.BibliotecaJuegos;
+import com.mycompany.classes.Comentario;
 import com.mycompany.classes.Foto;
 import com.mycompany.classes.JuegoC;
 import java.io.FileNotFoundException;
@@ -19,11 +20,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import tdas.ArrayList;
 import tdas.IteratorCL;
@@ -33,7 +37,7 @@ import tdas.IteratorCL;
  *
  * @author César
  */
-public class JuegoVentController {
+public class JuegoVentController implements Comparable<Comentario>{
 
     @FXML
     private Text nJuego;
@@ -58,6 +62,10 @@ public class JuegoVentController {
     private static Album albumSeleccionado = new Album();
     private IteratorCL<Foto> iterador;
     private Iterator<Album> iteradorAlbum;
+    @FXML
+    private VBox comentA;
+    @FXML
+    private ComboBox<String> ordenComen;
 
     /**
      * Initializes the controller class.
@@ -66,6 +74,9 @@ public class JuegoVentController {
         colocarImagenBoton();
         //System.out.println(BibliotecaJuegos.getAlbumSelec().getNombre());
         leerJuego();
+        leerComentario();
+        infoMostrarCombo();
+        
         /*
         nJuego.setDisable(true);
         nAnio.setDisable(true);
@@ -163,6 +174,77 @@ public class JuegoVentController {
                 juego = new JuegoC(j.getNombre(), j.getDesarrollador(), j.getFecha(), j.getGenero(), j.getDescripcion());
             }
         }
+    }
+    public void leerComentario(){
+        ArrayList<Comentario> comentarios = Comentario.lecturaAlbum(juego.getNombre());
+        for(Comentario c:comentarios){
+            HBox cont = new HBox();
+            Label usuario = new Label(c.getUsuario());
+            Label fecha = new Label(c.getFecha());
+            Text descripcion = new Text(c.getDescripcion());
+            int cal = c.getCalificacion();
+            for(int i=0;i<cal;i++){
+                URL linkEstrella = getClass().getResource("/com/mycompany/prg9/imagenes/star.png");
+                Image imgEstrella = new Image(linkEstrella.toString(), 20, 20, false, true);
+                ImageView estrella = new ImageView(imgEstrella);
+                cont.getChildren().add(estrella);
+                
+            }
+            comentA.getChildren().addAll(cont,usuario,fecha,descripcion);
+        }
+    }
+
+    @FXML
+    private void mostrarOrden(ActionEvent event) {
+        ArrayList<Comentario> coment = Comentario.lecturaAlbum(juego.getNombre());
+        
+        String orden = ordenComen.getValue();
+        System.out.println(orden);
+        comentA.getChildren().clear();
+        Label comentarios = new Label("Comentarios:");
+        comentA.getChildren().addAll(comentarios,ordenComen);
+        
+        if(orden.equals("Mayor Calificación")){
+            /*ArrayList<Integer> num = new ArrayList<Integer>();
+            for(Comentario c:coment){
+                
+                num.add(c.getCalificacion());
+            }
+            //Collections.sort(num);
+            Comparator<Comentario> compareByCalificacion =new Comparator<Comentario>(){
+                @Override
+                public int compare(Comentario o1, Comentario o2) {
+                    if(o1.getCalificacion()==o2.getCalificacion()){
+                        return 0;
+                    }
+                    else return 1;
+                }
+           
+        
+        };*/
+            
+        }
+        else if(orden.equals("Menor Calificación")){
+            
+        }
+        else if(orden.equals("Fecha Mayor a Menor")){
+            
+        }
+        else if(orden.equals("Fecha Menor a Mayor")){
+            
+        }
+    }
+    
+    public void infoMostrarCombo(){
+        ordenComen.getItems().add("Fecha Mayor a Menor");
+        ordenComen.getItems().add("Fecha Menor a Mayor");
+        ordenComen.getItems().add("Mayor Calificación");
+        ordenComen.getItems().add("Menor Calificación");
+    }
+
+    @Override
+    public int compareTo(Comentario o) {
+       return 1;
     }
 
 }

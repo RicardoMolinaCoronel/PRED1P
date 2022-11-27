@@ -1,16 +1,16 @@
 .root{
     -fx-font-family: "Verdana";
-    -fx-background-color: linear-gradient(to bottom right, #191970, #FFFAF0);
+    -fx-background-color: linear-gradient(to bottom right, #FFFFFF);
 }
 
 .Pane {
-     -fx-background-color: linear-gradient(to bottom right, #191970, #FFFAF0);
+     -fx-background-color: linear-gradient(to bottom right, #FFFFFF);
 }
 
 
 
 .split-pane{
-    -fx-background-color: linear-gradient(to bottom right, #191970, #FFFAF0);
+    -fx-background-color: linear-gradient(to bottom right, #FFFFFF);
 }
 
 
@@ -22,12 +22,12 @@
 
 #nombreFoto{
     -fx-font-size: 11pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
@@ -64,7 +64,7 @@
 
 .table-view .column-header .label {
     -fx-font-size: 20pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-alignment: center-left;
     -fx-opacity: 1;
     -fx-font-weight: normal;
@@ -94,11 +94,11 @@
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-text-fill: white;
-    -fx-opacity: 0.9;
+    -fx-opacity: 1.0;
 }
 
 .menu .left-container {
-    -fx-background-color: black;
+    -fx-background-color: white;
 }
 
 .text-field {
