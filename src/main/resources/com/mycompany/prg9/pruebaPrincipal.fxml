@@ -3,9 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="400.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.PruebaPrincipalController">
@@ -23,13 +25,17 @@
             <Button fx:id="btnInicio" mnemonicParsing="false" onAction="#regresoInicio" text="Inicio" />
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="367.0" prefWidth="600.0">
+      <ScrollPane id="scrollBiblioteca" fx:id="scrollP" prefHeight="472.0" prefWidth="372.0" stylesheets="@css/InterfazCSS.css">
+         <content>
+         <TilePane fx:id="biblioteca" prefHeight="372.0" prefWidth="602.0" styleClass="split-pane" stylesheets="@css/InterfazCSS.css">
+      <children>
+             <HBox fx:id="hboxPrincipal" alignment="CENTER_LEFT" prefHeight="367.0" prefWidth="600.0">
                    <children>
             <Button mnemonicParsing="false" onAction="#atras" prefHeight="163.0" prefWidth="47.0" text="&lt;" />
             <Pane prefHeight="367.0" prefWidth="479.0">
                <children>
-                  <Label fx:id="labelImagen1" layoutX="14.0" layoutY="90.0" prefHeight="227.0" prefWidth="220.0" />
-                  <Label fx:id="labelImagen2" layoutX="245.0" layoutY="90.0" prefHeight="227.0" prefWidth="220.0" />
+                  <Label fx:id="labelImagen1" layoutX="14.0" layoutY="90.0" onMouseClicked="#clickImagen1" prefHeight="227.0" prefWidth="220.0" />
+                  <Label fx:id="labelImagen2" layoutX="245.0" layoutY="90.0" onMouseClicked="#clickImagen2" prefHeight="227.0" prefWidth="220.0" />
                   <Label alignment="CENTER" layoutX="-2.0" layoutY="25.0" prefHeight="19.0" prefWidth="479.0" text="GAME STORE" />
                   <Label fx:id="labelTextoJuego1" alignment="CENTER" layoutX="14.0" layoutY="323.0" prefHeight="19.0" prefWidth="220.0" />
                   <Label fx:id="labelTextoJuego2" alignment="CENTER" layoutX="245.0" layoutY="323.0" prefHeight="19.0" prefWidth="220.0" />
@@ -39,6 +45,10 @@
          </children>
 
           </HBox>
+          </children>
+          </TilePane>
+          </content>
+          </ScrollPane>
    </children>
    
 </VBox>

@@ -41,6 +41,46 @@ public class JuegoVentController implements Comparable<Comentario>{
 
     @FXML
     private Text nJuego;
+
+    public Text getnJuego() {
+        return nJuego;
+    }
+
+    public void setnJuego(Text nJuego) {
+        this.nJuego = nJuego;
+    }
+
+    public Text getnAnio() {
+        return nAnio;
+    }
+
+    public void setnAnio(Text nAnio) {
+        this.nAnio = nAnio;
+    }
+
+    public Text getnDesarrollador() {
+        return nDesarrollador;
+    }
+
+    public void setnDesarrollador(Text nDesarrollador) {
+        this.nDesarrollador = nDesarrollador;
+    }
+
+    public Text getnDescripcion() {
+        return nDescripcion;
+    }
+
+    public void setnDescripcion(Text nDescripcion) {
+        this.nDescripcion = nDescripcion;
+    }
+
+    public Text getnGenero() {
+        return nGenero;
+    }
+
+    public void setnGenero(Text nGenero) {
+        this.nGenero = nGenero;
+    }
     @FXML
     private Text nAnio;
     @FXML
