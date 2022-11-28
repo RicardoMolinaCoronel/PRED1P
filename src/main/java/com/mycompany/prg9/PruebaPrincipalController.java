@@ -61,9 +61,14 @@ public class PruebaPrincipalController implements Initializable {
     @FXML
     private Button btnInicio;
      @FXML
-    Label labelImagen1;
+    private Label labelImagen1;
     @FXML
-    Label labelImagen2;
+    private Label labelImagen2;
+    @FXML
+    private Label labelTextoJuego1;
+    @FXML
+    private Label labelTextoJuego2;
+    
     
     IteratorCL<Album> iterador;
         
@@ -164,10 +169,12 @@ public class PruebaPrincipalController implements Initializable {
        }
        iterador=(IteratorCL<Album>) titulos.iterator();
        ImageView imgview = null;
+       String titulo1=iterador.next().getNombre();
+       String titulo2=iterador.next().getNombre();
             try{
                 //agrego la imagen de la miniatura
                 
-                InputStream input = App.class.getResource("imagenes/"+iterador.next().getNombre()+".jpg").openStream();
+                InputStream input = App.class.getResource("imagenes/"+titulo1+".jpg").openStream();
                 Image img = new Image(input, 220,227, false, false);
                 imgview = new ImageView(img);
             }catch(NullPointerException | IOException ex){
@@ -179,7 +186,7 @@ public class PruebaPrincipalController implements Initializable {
        ImageView imgview2 = null;
             try{
                 //agrego la imagen de la miniatura
-                InputStream input = App.class.getResource("imagenes/"+iterador.next().getNombre()+".jpg").openStream();
+                InputStream input = App.class.getResource("imagenes/"+titulo2+".jpg").openStream();
                 Image img = new Image(input, 220,227, false, false);
                 imgview2 = new ImageView(img);
             }catch(NullPointerException | IOException ex){
@@ -189,7 +196,8 @@ public class PruebaPrincipalController implements Initializable {
             
             labelImagen1.setGraphic(imgview);
             labelImagen2.setGraphic(imgview2);
-        
+            labelTextoJuego1.setText(titulo1);
+            labelTextoJuego2.setText(titulo2);
         
         // TODO
     } 
@@ -214,6 +222,7 @@ public class PruebaPrincipalController implements Initializable {
                 InputStream input2 = App.class.getResource("imagenes/"+tituloAtras2+".jpg").openStream();
                 Image img2 = new Image(input2, 220,227, false, false);
                 imgview2 = new ImageView(img2);
+               
             }catch(NullPointerException | IOException ex){
                 //no hay la imagen buscada
                                 
@@ -222,6 +231,8 @@ public class PruebaPrincipalController implements Initializable {
             }
             labelImagen1.setGraphic(imgview);
             labelImagen2.setGraphic(imgview2);
+            labelTextoJuego1.setText(tituloAtras1);
+            labelTextoJuego2.setText(tituloAtras2);
     }
     @FXML
     private void adelante(ActionEvent event) throws IOException{
@@ -237,10 +248,11 @@ public class PruebaPrincipalController implements Initializable {
                 InputStream input = App.class.getResource("imagenes/"+tituloSiguiente1+".jpg").openStream();
                 Image img = new Image(input, 220,227, false, false);
                 imgview = new ImageView(img);
-                
+               
                 InputStream input2 = App.class.getResource("imagenes/"+tituloSiguiente2+".jpg").openStream();
                 Image img2 = new Image(input2, 220,227, false, false);
                 imgview2 = new ImageView(img2);
+                
             }catch(NullPointerException | IOException ex){
                 //no hay la imagen buscada
                                 
@@ -249,7 +261,8 @@ public class PruebaPrincipalController implements Initializable {
             }
             labelImagen1.setGraphic(imgview);
             labelImagen2.setGraphic(imgview2);
-        
+            labelTextoJuego1.setText(tituloSiguiente1);
+            labelTextoJuego2.setText(tituloSiguiente2);
     }
 
     

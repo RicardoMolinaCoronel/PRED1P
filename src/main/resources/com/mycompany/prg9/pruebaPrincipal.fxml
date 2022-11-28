@@ -28,8 +28,11 @@
             <Button mnemonicParsing="false" onAction="#atras" prefHeight="163.0" prefWidth="47.0" text="&lt;" />
             <Pane prefHeight="367.0" prefWidth="479.0">
                <children>
-                  <Label fx:id="labelImagen1" layoutX="14.0" layoutY="70.0" prefHeight="227.0" prefWidth="220.0" />
-                  <Label fx:id="labelImagen2" layoutX="245.0" layoutY="70.0" prefHeight="227.0" prefWidth="220.0" />
+                  <Label fx:id="labelImagen1" layoutX="14.0" layoutY="90.0" prefHeight="227.0" prefWidth="220.0" />
+                  <Label fx:id="labelImagen2" layoutX="245.0" layoutY="90.0" prefHeight="227.0" prefWidth="220.0" />
+                  <Label alignment="CENTER" layoutX="-2.0" layoutY="25.0" prefHeight="19.0" prefWidth="479.0" text="GAME STORE" />
+                  <Label fx:id="labelTextoJuego1" alignment="CENTER" layoutX="14.0" layoutY="323.0" prefHeight="19.0" prefWidth="220.0" />
+                  <Label fx:id="labelTextoJuego2" alignment="CENTER" layoutX="245.0" layoutY="323.0" prefHeight="19.0" prefWidth="220.0" />
                </children>
             </Pane>
             <Button mnemonicParsing="false" onAction="#adelante" prefHeight="163.0" prefWidth="47.0" text="&gt;" />
