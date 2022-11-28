@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
@@ -10,7 +12,13 @@
    <children>
       <HBox prefHeight="29.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css">
          <children>
-            <Button fx:id="filtrar" mnemonicParsing="false" onAction="#filtrarJuego" text="Filtrar" />
+            <Button fx:id="filtrar" mnemonicParsing="false" onAction="#filtrarJuego" text="Filtrar">
+               <HBox.margin>
+                  <Insets right="100.0" />
+               </HBox.margin></Button>
+            <TextField fx:id="buscador" promptText="Juego....." />
+            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarJuego" />
+            <Button fx:id="btnInicio" mnemonicParsing="false" onAction="#regresoInicio" text="Inicio" />
          </children>
       </HBox>
       <ScrollPane id="scrollBiblioteca" fx:id="scrollP" prefHeight="472.0" prefWidth="371.0" stylesheets="@css/InterfazCSS.css">
