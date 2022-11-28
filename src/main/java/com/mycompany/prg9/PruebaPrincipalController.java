@@ -34,6 +34,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.TilePane;
+import tdas.IteratorCL;
+import tdas.ArrayList;
+import tdas.DoubleLinkedCircularList;
+
 /**
  * FXML Controller class
  *
@@ -44,16 +48,24 @@ public class PruebaPrincipalController implements Initializable {
 
    @FXML
     private Button filtrar;
+   /*
     @FXML
     private ScrollPane scrollP;
     @FXML
     private TilePane biblioteca;
+   */
     @FXML
     private TextField buscador;
     @FXML
     private Button btnBuscar;
     @FXML
     private Button btnInicio;
+     @FXML
+    Label labelImagen1;
+    @FXML
+    Label labelImagen2;
+    
+    IteratorCL<Album> iterador;
         
     /**
      * Initializes the controller class.
@@ -62,12 +74,12 @@ public class PruebaPrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         colocarImagenBoton();
         btnInicio.setVisible(false);
-    biblioteca.setAlignment(Pos.CENTER);
+   /* biblioteca.setAlignment(Pos.CENTER);
         biblioteca.setPadding(new Insets(15, 15, 15, 15));
         biblioteca.setVgap(30);
         biblioteca.setHgap(20);
         scrollP.setFitToWidth(true);
-        scrollP.setContent(biblioteca);
+        scrollP.setContent(biblioteca);*/
         
         //scrollP.backgroundProperty().;
         //scrollP.setContent(biblioteca);
@@ -75,7 +87,7 @@ public class PruebaPrincipalController implements Initializable {
        //scrollP.setContent(biblioteca);
        //scrollP.setContent(bot);
         
-        for(Album al: BibliotecaJuegos.getListaAlbumes()){
+     /*   for(Album al: BibliotecaJuegos.getListaAlbumes()){
            // System.out.println(al);
             Album album=al;
             
@@ -99,7 +111,7 @@ public class PruebaPrincipalController implements Initializable {
             vboxalbum.getChildren().add(new Label(album.getNombre()));
             //vboxalbum.getChildren().add(new Label(album.getDescripcion()));
             
-            biblioteca.getChildren().add(vboxalbum);
+            //biblioteca.getChildren().add(vboxalbum);
             
            
            
@@ -139,8 +151,107 @@ public class PruebaPrincipalController implements Initializable {
             });
            
         }
+*/
+      System.out.println("aaaa");
+        ArrayList<Album> albumes=BibliotecaJuegos.getListaAlbumes();
+       
+       DoubleLinkedCircularList<Album> titulos= new DoubleLinkedCircularList<>();
+       for(Album al:albumes){
+           if(!al.getNombre().equals("")){
+           titulos.addLast(al);
+           System.out.println(al.getNombre());
+           }
+       }
+       iterador=(IteratorCL<Album>) titulos.iterator();
+       ImageView imgview = null;
+            try{
+                //agrego la imagen de la miniatura
+                
+                InputStream input = App.class.getResource("imagenes/"+iterador.next().getNombre()+".jpg").openStream();
+                Image img = new Image(input, 220,227, false, false);
+                imgview = new ImageView(img);
+            }catch(NullPointerException | IOException ex){
+                //no hay la imagen buscada
+                                System.out.println(titulos.get(0).getNombre());
+
+                imgview = new ImageView();
+            } 
+       ImageView imgview2 = null;
+            try{
+                //agrego la imagen de la miniatura
+                InputStream input = App.class.getResource("imagenes/"+iterador.next().getNombre()+".jpg").openStream();
+                Image img = new Image(input, 220,227, false, false);
+                imgview2 = new ImageView(img);
+            }catch(NullPointerException | IOException ex){
+                //no hay la imagen buscada
+                imgview2 = new ImageView();
+            }     
+            
+            labelImagen1.setGraphic(imgview);
+            labelImagen2.setGraphic(imgview2);
+        
+        
         // TODO
     } 
+    @FXML
+    private void atras(ActionEvent event) throws IOException{
+       ImageView imgview = null;
+       ImageView imgview2 = null;
+       iterador.previous();
+       iterador.previous();
+       iterador.previous();
+       String tituloAtras2=iterador.previous().getNombre();
+       String tituloAtras1=iterador.previous().getNombre();      
+       iterador.next();
+       iterador.next();
+       iterador.next();
+            try{
+                //agrego la imagen de la miniatura               
+                InputStream input = App.class.getResource("imagenes/"+tituloAtras1+".jpg").openStream();
+                Image img = new Image(input, 220,227, false, false);
+                imgview = new ImageView(img);
+                
+                InputStream input2 = App.class.getResource("imagenes/"+tituloAtras2+".jpg").openStream();
+                Image img2 = new Image(input2, 220,227, false, false);
+                imgview2 = new ImageView(img2);
+            }catch(NullPointerException | IOException ex){
+                //no hay la imagen buscada
+                                
+                imgview = new ImageView();
+                imgview2 = new ImageView();
+            }
+            labelImagen1.setGraphic(imgview);
+            labelImagen2.setGraphic(imgview2);
+    }
+    @FXML
+    private void adelante(ActionEvent event) throws IOException{
+       ImageView imgview = null;
+       ImageView imgview2 = null;
+       String tituloSiguiente1=iterador.next().getNombre();
+       String tituloSiguiente2=iterador.next().getNombre();
+       System.out.println(tituloSiguiente1);
+       System.out.println(tituloSiguiente2);
+
+            try{
+                //agrego la imagen de la miniatura                
+                InputStream input = App.class.getResource("imagenes/"+tituloSiguiente1+".jpg").openStream();
+                Image img = new Image(input, 220,227, false, false);
+                imgview = new ImageView(img);
+                
+                InputStream input2 = App.class.getResource("imagenes/"+tituloSiguiente2+".jpg").openStream();
+                Image img2 = new Image(input2, 220,227, false, false);
+                imgview2 = new ImageView(img2);
+            }catch(NullPointerException | IOException ex){
+                //no hay la imagen buscada
+                                
+                imgview = new ImageView();
+                imgview2 = new ImageView();
+            }
+            labelImagen1.setGraphic(imgview);
+            labelImagen2.setGraphic(imgview2);
+        
+    }
+
     
     private void colocarImagenBoton() {
         URL filtro = getClass().getResource("/com/mycompany/prg9/imagenes/filtrar.png");
@@ -165,7 +276,7 @@ public class PruebaPrincipalController implements Initializable {
         btnInicio.setVisible(true);
         System.out.println( buscador.getText());
         String busqueda = buscador.getText();
-        biblioteca.getChildren().clear();
+       // biblioteca.getChildren().clear();
         for(Album al: BibliotecaJuegos.getListaAlbumes()){
            // System.out.println(al);
            if(al.getNombre().toLowerCase().startsWith(busqueda.toLowerCase())){
@@ -191,7 +302,7 @@ public class PruebaPrincipalController implements Initializable {
             vboxalbum.getChildren().add(new Label(album.getNombre()));
             //vboxalbum.getChildren().add(new Label(album.getDescripcion()));
             
-            biblioteca.getChildren().add(vboxalbum);
+           // biblioteca.getChildren().add(vboxalbum);
             
            
            
@@ -239,7 +350,7 @@ public class PruebaPrincipalController implements Initializable {
     private void regresoInicio(ActionEvent event) {
         btnInicio.setVisible(false);
         buscador.clear();
-         biblioteca.getChildren().clear();
+      //   biblioteca.getChildren().clear();
          for(Album al: BibliotecaJuegos.getListaAlbumes()){
            // System.out.println(al);
            
@@ -265,7 +376,7 @@ public class PruebaPrincipalController implements Initializable {
             vboxalbum.getChildren().add(new Label(album.getNombre()));
             //vboxalbum.getChildren().add(new Label(album.getDescripcion()));
             
-            biblioteca.getChildren().add(vboxalbum);
+      //      biblioteca.getChildren().add(vboxalbum);
             
            
            

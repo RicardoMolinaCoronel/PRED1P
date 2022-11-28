@@ -160,7 +160,7 @@ public class ArrayList<E> implements List<E>, Iterable<E>,Serializable {
     }
 
     public E get(int p) {
-        if (p <= 0 || p > ultimo) {
+        if (p < 0 || p > ultimo) {
             throw new ArrayIndexOutOfBoundsException();
         }
         return arreglo[p];

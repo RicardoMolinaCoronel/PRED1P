@@ -2,29 +2,40 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.PruebaPrincipalController">
+<VBox prefHeight="400.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.PruebaPrincipalController">
    <children>
       <HBox prefHeight="29.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css">
          <children>
             <Button fx:id="filtrar" mnemonicParsing="false" onAction="#filtrarJuego" text="Filtrar">
-               <HBox.margin>
+              <HBox.margin>
                   <Insets right="100.0" />
-               </HBox.margin></Button>
+               </HBox.margin>
+
+            </Button>
             <TextField fx:id="buscador" promptText="Juego....." />
             <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarJuego" />
             <Button fx:id="btnInicio" mnemonicParsing="false" onAction="#regresoInicio" text="Inicio" />
          </children>
       </HBox>
-      <ScrollPane id="scrollBiblioteca" fx:id="scrollP" prefHeight="472.0" prefWidth="371.0" stylesheets="@css/InterfazCSS.css">
-         <content>
-            <TilePane fx:id="biblioteca" prefHeight="372.0" prefWidth="602.0" styleClass="split-pane" stylesheets="@css/InterfazCSS.css" />
-         </content>
-      </ScrollPane>
+      <HBox alignment="CENTER_LEFT" prefHeight="367.0" prefWidth="600.0">
+                   <children>
+            <Button mnemonicParsing="false" onAction="#atras" prefHeight="163.0" prefWidth="47.0" text="&lt;" />
+            <Pane prefHeight="367.0" prefWidth="479.0">
+               <children>
+                  <Label fx:id="labelImagen1" layoutX="14.0" layoutY="70.0" prefHeight="227.0" prefWidth="220.0" />
+                  <Label fx:id="labelImagen2" layoutX="245.0" layoutY="70.0" prefHeight="227.0" prefWidth="220.0" />
+               </children>
+            </Pane>
+            <Button mnemonicParsing="false" onAction="#adelante" prefHeight="163.0" prefWidth="47.0" text="&gt;" />
+         </children>
+
+          </HBox>
    </children>
+   
 </VBox>

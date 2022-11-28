@@ -244,10 +244,10 @@ return new IteratorCL(this);
             return null;
         }
         if (indice == 0) {
-            return ultimo.contenido;
+            return primero.contenido;
         }
         if (indice == length() - 1) {
-            return primero.contenido;
+            return ultimo.contenido;
         }
         Nodo<E> tmp = primero;
         int j = 0;
