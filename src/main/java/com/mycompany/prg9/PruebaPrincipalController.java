@@ -79,6 +79,10 @@ public class PruebaPrincipalController implements Initializable {
     IteratorCL<Album> iterador;
     Album alImagen1=null;
     Album alImagen2=null;
+    @FXML
+    private Button btnAtras;
+    @FXML
+    private Button btnAdelante;
     /**
      * Initializes the controller class.
      */
@@ -292,6 +296,12 @@ public class PruebaPrincipalController implements Initializable {
         URL casa = getClass().getResource("/com/mycompany/prg9/imagenes/casa.png");
         Image imgCasa = new Image(casa.toString(), 20, 20, false, true);
         btnInicio.setGraphic(new ImageView(imgCasa));
+         URL linkAntes = getClass().getResource("/com/mycompany/prg9/imagenes/anterior.png");
+        URL linkDespues = getClass().getResource("/com/mycompany/prg9/imagenes/siguiente-boton.png");
+        Image imgAntes = new Image(linkAntes.toString(), 20, 20, false, true);
+        Image imgDespues = new Image(linkDespues.toString(), 20, 20, false, true);
+         btnAtras.setGraphic(new ImageView(imgAntes));
+        btnAdelante.setGraphic(new ImageView(imgDespues));
         
     }
 

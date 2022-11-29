@@ -12,8 +12,13 @@ import com.mycompany.classes.JuegoC;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
+import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -236,16 +241,45 @@ public class JuegoVentController implements Comparable<Comentario>{
 
     @FXML
     private void mostrarOrden(ActionEvent event) {
-        ArrayList<Comentario> coment = Comentario.lecturaAlbum(juego.getNombre());
-        
+        ArrayList<Comentario> coment =  Comentario.lecturaAlbum(juego.getNombre());
+        Label comen = new Label("Comentarios:");
         String orden = ordenComen.getValue();
         System.out.println(orden);
-        comentA.getChildren().clear();
-        Label comentarios = new Label("Comentarios:");
-        comentA.getChildren().addAll(comentarios,ordenComen);
         
+        comentA.getChildren().clear();
+        comentA.getChildren().addAll(comen,ordenComen);
+        Label comentarios = new Label("Comentarios:");
+        ///comentA.getChildren().addAll(comentarios,ordenComen);
         if(orden.equals("Mayor Calificación")){
-            /*ArrayList<Integer> num = new ArrayList<Integer>();
+            PriorityQueue<Comentario>com=new PriorityQueue<Comentario>((Comentario c1,Comentario c2)->{
+                return c1.getCalificacion()-c2.getCalificacion();
+            });
+           /*
+           Collections.sort(coment,new Comparator<Comentario>(){
+                @Override
+                public int compare(Comentario o1, Comentario o2) {
+                    return o1.getCalificacion()-o2.getCalificacion();
+                }
+        });*/
+            System.out.println(com);
+            for(Comentario c:coment){
+            HBox cont = new HBox();
+            
+            Label usuario = new Label(c.getUsuario());
+            Label fecha = new Label(c.getFecha());
+            Text descripcion = new Text(c.getDescripcion());
+            int cal = c.getCalificacion();
+            for(int i=0;i<cal;i++){
+                URL linkEstrella = getClass().getResource("/com/mycompany/prg9/imagenes/star.png");
+                Image imgEstrella = new Image(linkEstrella.toString(), 20, 20, false, true);
+                ImageView estrella = new ImageView(imgEstrella);
+                cont.getChildren().add(estrella);
+                
+            }
+            //
+            comentA.getChildren().addAll(cont,usuario,fecha,descripcion);
+        }
+           /* ArrayList<Integer> num = new ArrayList<Integer>();
             for(Comentario c:coment){
                 
                 num.add(c.getCalificacion());
@@ -254,10 +288,7 @@ public class JuegoVentController implements Comparable<Comentario>{
             Comparator<Comentario> compareByCalificacion =new Comparator<Comentario>(){
                 @Override
                 public int compare(Comentario o1, Comentario o2) {
-                    if(o1.getCalificacion()==o2.getCalificacion()){
-                        return 0;
-                    }
-                    else return 1;
+                    return o1.getCalificacion()-o2.getCalificacion();
                 }
            
         
@@ -265,7 +296,28 @@ public class JuegoVentController implements Comparable<Comentario>{
             
         }
         else if(orden.equals("Menor Calificación")){
+            /*Collections.sort(coment,new Comparator<Comentario>(){
+                @Override
+                public int compare(Comentario o1, Comentario o2) {
+                    return o2.getCalificacion()-o1.getCalificacion();
+                }
+        });*/
+             for(Comentario c:coment){
+            HBox cont = new HBox();
             
+            Label usuario = new Label(c.getUsuario());
+            Label fecha = new Label(c.getFecha());
+            Text descripcion = new Text(c.getDescripcion());
+            int cal = c.getCalificacion();
+            for(int i=0;i<cal;i++){
+                URL linkEstrella = getClass().getResource("/com/mycompany/prg9/imagenes/star.png");
+                Image imgEstrella = new Image(linkEstrella.toString(), 20, 20, false, true);
+                ImageView estrella = new ImageView(imgEstrella);
+                cont.getChildren().add(estrella);
+                
+            }
+            comentA.getChildren().addAll(cont,usuario,fecha,descripcion);
+        }
         }
         else if(orden.equals("Fecha Mayor a Menor")){
             
