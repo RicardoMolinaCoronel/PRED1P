@@ -18,7 +18,7 @@
          <left>
             <VBox prefHeight="210.0" prefWidth="178.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="Deseos" />
+                  <Button fx:id="botonDeseos" mnemonicParsing="false" onAction="#enDeseos" text="Deseos" />
                   <Label text="Juego:">
                      <font>
                         <Font size="18.0" />

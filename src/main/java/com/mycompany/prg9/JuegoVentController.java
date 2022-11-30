@@ -10,7 +10,12 @@ import com.mycompany.classes.BibliotecaJuegos;
 import com.mycompany.classes.Comentario;
 import com.mycompany.classes.Foto;
 import com.mycompany.classes.JuegoC;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -202,6 +207,40 @@ public class JuegoVentController implements Comparable<Comentario>{
         App.setRoot("pruebaPrincipal");
 
     }
+    @FXML
+    private void enDeseos() throws IOException {
+        try(BufferedReader bufferedReader =new BufferedReader(new FileReader("archivos/usuarios.txt"))){
+            String linea;
+            int x=0;
+            ArrayList<String> lineas= new ArrayList<>();
+            while((linea=bufferedReader.readLine())!=null){
+                lineas.addLast(linea);
+            }
+            for(String l:lineas){
+            
+        }
+        }catch (IOException ex) { 
+            ex.printStackTrace();
+        }
+        
+        BufferedWriter bw = null;
+		try {
+			File fichero = new File("archivos/usuarios.txt");
+			System.out.println(fichero.getCanonicalPath()); // Path completodonde se creará el fichero.
+			bw = new BufferedWriter(new FileWriter(fichero,true));
+			bw.newLine();
+                      //  bw.write(textUsuario.getText()+";"+textPassword.getText()+";,");
+                        //texto.setText("Usuario creado correctamente");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				bw.close(); // Cerramos el buffer
+			} catch (Exception e) {
+			}
+    }
+
+    }
     
 
     private void colocarImagenBoton() {
@@ -263,7 +302,7 @@ public class JuegoVentController implements Comparable<Comentario>{
                 return c1.getCalificacion()-c2.getCalificacion();
             });
         }
-        else if(orden.equals("Más reciente")){
+        else if(orden.equals("Más recientes")){
             comentariosOrdenados=new PriorityQueue<Comentario>((Comentario c1,Comentario c2)->{
                 String[] split1=c1.getFecha().split("/");
                 String[] split2=c2.getFecha().split("/");
@@ -276,7 +315,7 @@ public class JuegoVentController implements Comparable<Comentario>{
                 return ((v2[0]-v1[0]))+((v2[1]-v1[1])*31)+((v2[2]-v1[2])*365);
             });            
         }
-        else if(orden.equals("Más antiguo")){
+        else if(orden.equals("Más antiguos")){
             
              comentariosOrdenados=new PriorityQueue<Comentario>(new Comparator<Comentario>() {
                  @Override

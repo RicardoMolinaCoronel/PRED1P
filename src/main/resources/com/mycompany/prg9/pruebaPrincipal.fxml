@@ -55,7 +55,7 @@
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
           
          <children>
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="167.0" text="Lista de deseos">
+            <Button fx:id="botonListaDeseos" mnemonicParsing="false" onAction="#listaDeseos" prefHeight="34.0" prefWidth="167.0" text="Lista de deseos">
             <HBox.margin>
                   <Insets right="100.0" />
                </HBox.margin>    
