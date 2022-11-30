@@ -113,6 +113,12 @@
                         <Font size="13.0" />
                      </font>
                   </Text>
+                  <Label text="Valoración:" />
+                  <Text fx:id="valoracion" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </VBox>
          </center>
