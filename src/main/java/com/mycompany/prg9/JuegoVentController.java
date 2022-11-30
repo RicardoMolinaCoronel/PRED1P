@@ -259,46 +259,18 @@ public class JuegoVentController implements Comparable<Comentario>{
             for(Comentario c: coment){
                 comentariosOrdenados.offer(c);
             }
-            
-           
-           /* ArrayList<Integer> num = new ArrayList<Integer>();
-            for(Comentario c:coment){
-                
-                num.add(c.getCalificacion());
-            }
-            //Collections.sort(num);
-            Comparator<Comentario> compareByCalificacion =new Comparator<Comentario>(){
-                @Override
-                public int compare(Comentario o1, Comentario o2) {
-                    return o1.getCalificacion()-o2.getCalificacion();
-                }
-           
-        
-        };*/
-            
+
         }
         else if(orden.equals("Menor Calificación")){
             comentariosOrdenados=new PriorityQueue<Comentario>((Comentario c1,Comentario c2)->{
-                if(c1.getCalificacion()<c2.getCalificacion()){
-                    return -1;
-                }else if(c1.getCalificacion()>c2.getCalificacion()){
-                    return 1;
-                }else{
-                    return 0;
-                }
+                return c1.getCalificacion()-c2.getCalificacion();
             });
              for(Comentario c: coment){
                 comentariosOrdenados.offer(c);
             }
-            /*Collections.sort(coment,new Comparator<Comentario>(){
-                @Override
-                public int compare(Comentario o1, Comentario o2) {
-                    return o2.getCalificacion()-o1.getCalificacion();
-                }
-        });*/
             
         }
-        else if(orden.equals("Fecha Mayor a Menor")){
+        else if(orden.equals("Más reciente")){
             comentariosOrdenados=new PriorityQueue<Comentario>((Comentario c1,Comentario c2)->{
                 String[] split1=c1.getFecha().split("/");
                 String[] split2=c2.getFecha().split("/");
@@ -309,13 +281,12 @@ public class JuegoVentController implements Comparable<Comentario>{
                     v2[x]=Integer.valueOf(split2[x]);
                 }
                 return ((v2[0]-v1[0]))+((v2[1]-v1[1])*30)+((v2[2]-v1[2])*365);
-            });
-            
+            });            
             for(Comentario c: coment){
                 comentariosOrdenados.offer(c);
             }
         }
-        else if(orden.equals("Fecha Menor a Mayor")){
+        else if(orden.equals("Más antiguo")){
             
              comentariosOrdenados=new PriorityQueue<Comentario>(new Comparator<Comentario>() {
                  @Override
@@ -365,8 +336,8 @@ public class JuegoVentController implements Comparable<Comentario>{
     }
     
     public void infoMostrarCombo(){
-        ordenComen.getItems().add("Fecha Mayor a Menor");
-        ordenComen.getItems().add("Fecha Menor a Mayor");
+        ordenComen.getItems().add("Más reciente");
+        ordenComen.getItems().add("Más antiguo");
         ordenComen.getItems().add("Mayor Calificación");
         ordenComen.getItems().add("Menor Calificación");
     }
