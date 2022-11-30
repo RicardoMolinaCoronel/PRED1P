@@ -255,20 +255,11 @@ public class JuegoVentController implements Comparable<Comentario>{
             comentariosOrdenados=new PriorityQueue<Comentario>((Comentario c1,Comentario c2)->{
                 return c2.getCalificacion()-c1.getCalificacion();
             });
-          
-            for(Comentario c: coment){
-                comentariosOrdenados.offer(c);
-            }
-
         }
         else if(orden.equals("Menor Calificación")){
             comentariosOrdenados=new PriorityQueue<Comentario>((Comentario c1,Comentario c2)->{
                 return c1.getCalificacion()-c2.getCalificacion();
             });
-             for(Comentario c: coment){
-                comentariosOrdenados.offer(c);
-            }
-            
         }
         else if(orden.equals("Más reciente")){
             comentariosOrdenados=new PriorityQueue<Comentario>((Comentario c1,Comentario c2)->{
@@ -280,11 +271,8 @@ public class JuegoVentController implements Comparable<Comentario>{
                     v1[x]=Integer.valueOf(split1[x]);
                     v2[x]=Integer.valueOf(split2[x]);
                 }
-                return ((v2[0]-v1[0]))+((v2[1]-v1[1])*30)+((v2[2]-v1[2])*365);
+                return ((v2[0]-v1[0]))+((v2[1]-v1[1])*31)+((v2[2]-v1[2])*365);
             });            
-            for(Comentario c: coment){
-                comentariosOrdenados.offer(c);
-            }
         }
         else if(orden.equals("Más antiguo")){
             
@@ -302,17 +290,16 @@ public class JuegoVentController implements Comparable<Comentario>{
                          v1[x]=Integer.valueOf(split1[x]);
                          v2[x]=Integer.valueOf(split2[x]);
                      }
-                     int valor=((v1[0]-v2[0]))+((v1[1]-v2[1])*30)+((v1[2]-v2[2])*365);
+                     int valor=((v1[0]-v2[0]))+((v1[1]-v2[1])*31)+((v1[2]-v2[2])*365);
                      return valor;
                  }
              });
-             
-             for(Comentario c: coment){
-                comentariosOrdenados.offer(c);
-            }
       
         }
         if(orden!=null){
+            for(Comentario c: coment){
+                comentariosOrdenados.offer(c);
+            }
             Comentario c;
           while (!comentariosOrdenados.isEmpty()) {
                 c=comentariosOrdenados.poll();
