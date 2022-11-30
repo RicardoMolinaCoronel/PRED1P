@@ -4,6 +4,7 @@
  */
 package com.mycompany.prg9;
 
+
 import com.mycompany.classes.Album;
 import com.mycompany.classes.BibliotecaJuegos;
 import com.mycompany.classes.Comentario;
@@ -46,8 +47,6 @@ public class JuegoVentController implements Comparable<Comentario> {
 
     @FXML
     private Text nJuego;
-    @FXML
-    private Text valoracion;
 
     public Text getnJuego() {
         return nJuego;
@@ -123,7 +122,6 @@ public class JuegoVentController implements Comparable<Comentario> {
         leerJuego();
         leerComentario();
         infoMostrarCombo();
-        valoracion.setText(String.valueOf(prom()));
 
         /*
         nJuego.setDisable(true);
@@ -360,8 +358,92 @@ public class JuegoVentController implements Comparable<Comentario> {
             }
             
         } else if (orden.equals("Fecha Mayor a Menor")) {
+            PriorityQueue<Comentario> com = new PriorityQueue<Comentario>((Comentario c1, Comentario c2) -> {
+                String[]s1=c1.getFecha().split("/");
+                String[]s2=c2.getFecha().split("/");
+                if(Integer.valueOf(s1[2])-Integer.valueOf(s2[2])==0){
+                    if(Integer.valueOf(s1[1])-Integer.valueOf(s2[1])==0){
+                     if(Integer.valueOf(s1[0])-Integer.valueOf(s2[0])==0){
+                        return 0;
+                    }else{
+                     return Integer.valueOf(s2[0])-Integer.valueOf(s1[0]);}
+                     
+                    }else{return Integer.valueOf(s2[1])-Integer.valueOf(s1[1]);}
+                }
+                return Integer.valueOf(s2[2])-Integer.valueOf(s1[2]);  
+            });
+            for (Comentario co : coment) {
+                    com.offer(co);
+                
+            }
+            comenTmp.addFirst(com);
+            for (Comentario comentEvaluar : comenTmp.get(0)) {
+                System.out.println(comentEvaluar);
+                for (Comentario comentIgual : coment) {
+                    if (comentEvaluar.getUsuario().equals(comentIgual.getUsuario())) {
+                        HBox cont = new HBox();
+                        Label usuario = new Label(comentIgual.getUsuario());
+                        Label fecha = new Label(comentIgual.getFecha());
+                        Text descripcion = new Text(comentIgual.getDescripcion());
+                        int cal = comentIgual.getCalificacion();
+                        for (int i = 0; i < cal; i++) {
+                            URL linkEstrella = getClass().getResource("/com/mycompany/prg9/imagenes/star.png");
+                            Image imgEstrella = new Image(linkEstrella.toString(), 20, 20, false, true);
+                            ImageView estrella = new ImageView(imgEstrella);
+                            cont.getChildren().add(estrella);
 
+                        }
+                        comentA.getChildren().addAll(cont, usuario, fecha, descripcion);
+
+                    }
+                }
+            }
+            
+            
         } else if (orden.equals("Fecha Menor a Mayor")) {
+            PriorityQueue<Comentario> com = new PriorityQueue<Comentario>((Comentario c1, Comentario c2) -> {
+                String[]s1=c1.getFecha().split("/");
+                String[]s2=c2.getFecha().split("/");
+                if(Integer.valueOf(s2[2])-Integer.valueOf(s1[2])==0){
+                    if(Integer.valueOf(s2[1])-Integer.valueOf(s1[1])==0){
+                     if(Integer.valueOf(s2[0])-Integer.valueOf(s1[0])==0){
+                        return 0;
+                    }
+                     return Integer.valueOf(s1[0])-Integer.valueOf(s2[0]);
+                     
+                    }return Integer.valueOf(s1[1])-Integer.valueOf(s2[1]);
+                }
+                return Integer.valueOf(s1[2])-Integer.valueOf(s2[2]);  
+            });
+            for (Comentario co : coment) {
+                
+                    com.offer(co);
+                
+            }
+            comenTmp.addFirst(com);
+            for (Comentario comentEvaluar : comenTmp.get(0)) {
+                System.out.println(comentEvaluar);
+                for (Comentario comentIgual : coment) {
+                    if (comentEvaluar.getUsuario().equals(comentIgual.getUsuario())) {
+                        HBox cont = new HBox();
+                        Label usuario = new Label(comentIgual.getUsuario());
+                        Label fecha = new Label(comentIgual.getFecha());
+                        Text descripcion = new Text(comentIgual.getDescripcion());
+                        int cal = comentIgual.getCalificacion();
+                        for (int i = 0; i < cal; i++) {
+                            URL linkEstrella = getClass().getResource("/com/mycompany/prg9/imagenes/star.png");
+                            Image imgEstrella = new Image(linkEstrella.toString(), 20, 20, false, true);
+                            ImageView estrella = new ImageView(imgEstrella);
+                            cont.getChildren().add(estrella);
+
+                        }
+                        comentA.getChildren().addAll(cont, usuario, fecha, descripcion);
+
+                    }
+                }
+            }
+            
+            
 
         }
     }
@@ -376,14 +458,6 @@ public class JuegoVentController implements Comparable<Comentario> {
     @Override
     public int compareTo(Comentario o) {
         return 1;
-    }
-    public static int prom(){
-        ArrayList<Comentario> coment = Comentario.lecturaAlbum(juego.getNombre());
-        int valor = 0;
-        for(Comentario comentarios :coment){
-            valor+=comentarios.getCalificacion();
-        }
-        return valor/coment.size();
     }
 
 }
