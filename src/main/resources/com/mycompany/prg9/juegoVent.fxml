@@ -12,12 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="split-pane" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.JuegoVentController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="split-pane" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.JuegoVentController">
    <content>
       <BorderPane prefHeight="385.0" prefWidth="587.0" styleClass="Pane" stylesheets="@css/InterfazCSS.css">
          <left>
             <VBox prefHeight="210.0" prefWidth="178.0" BorderPane.alignment="CENTER">
                <children>
+                  <Button mnemonicParsing="false" text="Deseos" />
                   <Label text="Juego:">
                      <font>
                         <Font size="18.0" />

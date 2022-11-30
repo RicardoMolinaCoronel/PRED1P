@@ -20,7 +20,9 @@ import tdas.ArrayList;
  * JavaFX App
  */
 public class App extends Application {
-
+    public static boolean inicioSesion = false;
+    public static String usuarioIniciado=null;
+    public static ArrayList<String> listaDeseos;
     private static Scene scene;
     static ArrayList<Album> listaAlbum;
     File fileA=new File("");
@@ -36,6 +38,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        listaDeseos=new ArrayList<>();
         scene = new Scene(loadFXML("pruebaPrincipal"), 640, 480);
         scene.getStylesheets().add("com/mycompany/prg9/css/InterfazCSS.css");
         stage.setTitle("Game Store");

@@ -103,6 +103,7 @@ public class JuegoVentController implements Comparable<Comentario>{
     private Button btnSig;
     @FXML
     private Button btnRegresar;
+    
     private static Foto fotoSeleccionada = new Foto();
     public static JuegoC juego = new JuegoC();
     private static Album albumSeleccionado = new Album();
@@ -201,6 +202,7 @@ public class JuegoVentController implements Comparable<Comentario>{
         App.setRoot("pruebaPrincipal");
 
     }
+    
 
     private void colocarImagenBoton() {
         URL linkAntes = getClass().getResource("/com/mycompany/prg9/imagenes/anterior.png");
@@ -323,8 +325,8 @@ public class JuegoVentController implements Comparable<Comentario>{
     }
     
     public void infoMostrarCombo(){
-        ordenComen.getItems().add("Más reciente");
-        ordenComen.getItems().add("Más antiguo");
+        ordenComen.getItems().add("Más recientes");
+        ordenComen.getItems().add("Más antiguos");
         ordenComen.getItems().add("Mayor Calificación");
         ordenComen.getItems().add("Menor Calificación");
     }

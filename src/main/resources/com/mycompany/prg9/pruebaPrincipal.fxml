@@ -9,20 +9,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.PruebaPrincipalController">
+<VBox prefHeight="400.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.PruebaPrincipalController">
    <children>
       <HBox prefHeight="29.0" prefWidth="600.0" stylesheets="@css/InterfazCSS.css">
          <children>
             <Button fx:id="filtrar" mnemonicParsing="false" onAction="#filtrarJuego" text="Filtrar">
               <HBox.margin>
-                  <Insets right="100.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
 
             </Button>
-            <TextField fx:id="buscador" promptText="Juego....." />
+            <TextField fx:id="buscador" prefHeight="31.0" prefWidth="167.0" promptText="Juego....." />
             <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarJuego" />
             <Button fx:id="btnInicio" mnemonicParsing="false" onAction="#regresoInicio" text="Inicio" />
+            <Button fx:id="botonIniciarSesion" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="34.0" prefWidth="165.0" text="Iniciar sesión" />
          </children>
       </HBox>
       <ScrollPane id="scrollBiblioteca" fx:id="scrollP" prefHeight="472.0" prefWidth="372.0" stylesheets="@css/InterfazCSS.css">
@@ -32,7 +35,7 @@
              <HBox fx:id="hboxPrincipal" alignment="CENTER_LEFT" prefHeight="367.0" prefWidth="600.0">
                    <children>
             <Button fx:id="btnAtras" mnemonicParsing="false" onAction="#atras" prefHeight="163.0" prefWidth="47.0" />
-            <Pane prefHeight="367.0" prefWidth="479.0">
+            <Pane prefHeight="367.0" prefWidth="489.0">
                <children>
                   <Label fx:id="labelImagen1" layoutX="14.0" layoutY="90.0" onMouseClicked="#clickImagen1" prefHeight="227.0" prefWidth="220.0" />
                   <Label fx:id="labelImagen2" layoutX="245.0" layoutY="90.0" onMouseClicked="#clickImagen2" prefHeight="227.0" prefWidth="220.0" />
@@ -49,6 +52,21 @@
           </TilePane>
           </content>
           </ScrollPane>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+          
+         <children>
+            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="167.0" text="Lista de deseos">
+            <HBox.margin>
+                  <Insets right="100.0" />
+               </HBox.margin>    
+            </Button>
+            <Text fx:id="usuario" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" wrappingWidth="332.6666159629822">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
    </children>
    
 </VBox>

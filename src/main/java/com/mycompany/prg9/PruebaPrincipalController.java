@@ -38,6 +38,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 import tdas.IteratorCL;
 import tdas.ArrayList;
 import tdas.DoubleLinkedCircularList;
@@ -83,13 +84,35 @@ public class PruebaPrincipalController implements Initializable {
     private Button btnAtras;
     @FXML
     private Button btnAdelante;
+    @FXML
+    private Button botonIniciarSesion;
+    @FXML
+    private Text usuario;
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private void iniciarSesion(ActionEvent event) throws IOException {
+       if(App.inicioSesion){
+           App.inicioSesion=false;
+           App.usuarioIniciado=null;
+           App.listaDeseos=null;
+           botonIniciarSesion.setText("Iniciar Sesión");
+           usuario.setText("");
+       }else{
+                  App.setRoot("iniciarSesion");
+       }
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         colocarImagenBoton();
         btnInicio.setVisible(false);
+        if(App.inicioSesion){
+            usuario.setText("Usuario: "+App.usuarioIniciado);
+            botonIniciarSesion.setText("Cerrar Sesión");
+        }
+        
    /* biblioteca.setAlignment(Pos.CENTER);
         biblioteca.setPadding(new Insets(15, 15, 15, 15));
         biblioteca.setVgap(30);
