@@ -156,9 +156,17 @@ public class JuegoVentController implements Comparable<Comentario>{
         nDesarrollador.setText(juego.getDesarrollador());
         nGenero.setText(juego.getGenero());
         nDescripcion.setText(juego.getDescripcion());
+        if(App.listaDeseos.contains(albumSeleccionado.getNombre())){
+            cargarVisto();
+        }
 
     }
-
+    
+    public void cargarVisto(){
+        URL eliminar = getClass().getResource("/com/mycompany/prg9/imagenes/vistoBueno.png");
+            Image imgEliminar = new Image(eliminar.toString(), 20, 20, false, true);
+            botonDeseos.setGraphic(new ImageView(imgEliminar));
+    }
     public static Foto getFoto() {
         return fotoSeleccionada;
     }
@@ -216,6 +224,7 @@ public class JuegoVentController implements Comparable<Comentario>{
     private void enDeseos() throws IOException {
         if(App.inicioSesion){
             if(!App.listaDeseos.contains(albumSeleccionado.getNombre())){
+                
                 App.listaDeseos.addLast(albumSeleccionado.getNombre());
         String lineaDeseados;
         String[] lineaSplit;
@@ -269,6 +278,7 @@ public class JuegoVentController implements Comparable<Comentario>{
 			} catch (Exception e) {
 			}
     }
+               cargarVisto();
         }
         }
         

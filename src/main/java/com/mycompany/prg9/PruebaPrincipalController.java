@@ -385,7 +385,7 @@ public class PruebaPrincipalController implements Initializable {
             vboxalbum.getChildren().add(imgview);
             HBox nombreYEliminar= new HBox();
             nombreYEliminar.getChildren().add(new Label(album.getNombre()));
-            nombreYEliminar.setSpacing(20);
+            nombreYEliminar.setSpacing(15);
             Button botonEliminar= new Button("Eliminar");
             URL eliminar = getClass().getResource("/com/mycompany/prg9/imagenes/borrar.png");
             Image imgEliminar = new Image(eliminar.toString(), 20, 20, false, true);

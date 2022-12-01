@@ -12,13 +12,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="split-pane" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.JuegoVentController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="split-pane" stylesheets="@css/InterfazCSS.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.prg9.JuegoVentController">
    <content>
       <BorderPane prefHeight="385.0" prefWidth="587.0" styleClass="Pane" stylesheets="@css/InterfazCSS.css">
          <left>
             <VBox prefHeight="242.0" prefWidth="243.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="botonDeseos" mnemonicParsing="false" onAction="#enDeseos" text="Agregar a lista de deseos" />
+                  <Button fx:id="botonDeseos" mnemonicParsing="false" onAction="#enDeseos" prefHeight="34.0" prefWidth="259.0" text="Deseos" />
                   <Label text="Juego:">
                      <font>
                         <Font size="18.0" />
@@ -102,7 +102,7 @@
             </HBox>
          </top>
          <center>
-            <VBox prefHeight="140.0" prefWidth="409.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="244.0" prefWidth="337.0" BorderPane.alignment="CENTER">
                <children>
                   <Label text="Descripción:">
                      <font>
