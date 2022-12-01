@@ -280,6 +280,8 @@ public class JuegoVentController implements Comparable<Comentario>{
     }
                cargarVisto();
         }
+        }else{
+            App.setRoot("iniciarSesion");
         }
         
     }
