@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 /**
@@ -38,6 +40,7 @@ public class IniciarSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        colocarImagenBoton();
     }
     @FXML
     private void regresarMenu() throws IOException {
@@ -75,6 +78,13 @@ public class IniciarSesionController implements Initializable {
             ex.printStackTrace();
         }
 
+    }
+    private void colocarImagenBoton() {
+        URL regreso = getClass().getResource("/com/mycompany/prg9/imagenes/anterior.png");
+        Image imgRegreso = new Image(regreso.toString(), 20, 20, false, true);
+        btnRegresar.setGraphic(new ImageView(imgRegreso));
+        
+        
     }
     
 }

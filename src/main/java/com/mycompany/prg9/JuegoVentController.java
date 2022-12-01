@@ -52,6 +52,10 @@ public class JuegoVentController implements Comparable<Comentario>{
 
     @FXML
     private Text nJuego;
+    @FXML
+    private Button botonDeseos;
+    @FXML
+    private Text valoracion;
 
     public Text getnJuego() {
         return nJuego;
@@ -128,6 +132,7 @@ public class JuegoVentController implements Comparable<Comentario>{
         leerJuego();
         leerComentario();
         infoMostrarCombo();
+        valoracion.setText(String.valueOf(promedio()));
         
         /*
         nJuego.setDisable(true);
@@ -400,6 +405,15 @@ public class JuegoVentController implements Comparable<Comentario>{
     @Override
     public int compareTo(Comentario o) {
        return 1;
+    }
+    public int promedio(){
+    ArrayList<Comentario>comentarios = Comentario.lecturaAlbum(juego.getNombre());
+    double resultado = 0;
+    for(Comentario c:comentarios){
+        resultado+=c.getCalificacion();
+    }
+
+    return (int)(Math.round(resultado/comentarios.size()));
     }
 
 }

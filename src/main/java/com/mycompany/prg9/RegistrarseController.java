@@ -15,7 +15,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 /**
@@ -34,10 +37,13 @@ public class RegistrarseController implements Initializable {
     TextField textPassword;
     @FXML
     Text texto;
+    @FXML
+    private Button btnRegresar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("aa");
+        colocarImagenBoton();
     }  
     @FXML
     private void regresar() throws IOException {
@@ -82,4 +88,11 @@ public class RegistrarseController implements Initializable {
         texto.setText("Rellene todos los campos");
         }
 }
+    private void colocarImagenBoton() {
+        URL regreso = getClass().getResource("/com/mycompany/prg9/imagenes/anterior.png");
+        Image imgRegreso = new Image(regreso.toString(), 20, 20, false, true);
+        btnRegresar.setGraphic(new ImageView(imgRegreso));
+        
+        
+    }
 }

@@ -93,6 +93,8 @@ public class PruebaPrincipalController implements Initializable {
     private Button botonIniciarSesion;
     @FXML
     private Text usuario;
+    @FXML
+    private Button botonListaDeseos;
     /**
      * Initializes the controller class.
      */
@@ -117,6 +119,10 @@ public class PruebaPrincipalController implements Initializable {
         if(App.inicioSesion){
             usuario.setText("Usuario: "+App.usuarioIniciado);
             botonIniciarSesion.setText("Cerrar Sesión");
+            URL cerrarS = getClass().getResource("/com/mycompany/prg9/imagenes/cerrarSesion.png");
+            Image imgCerrarS = new Image(cerrarS.toString(), 20, 20, false, true);
+            botonIniciarSesion.setGraphic(new ImageView(imgCerrarS));
+            
         }
         
    /* biblioteca.setAlignment(Pos.CENTER);
@@ -316,7 +322,7 @@ public class PruebaPrincipalController implements Initializable {
     
     private void colocarImagenBoton() {
         URL filtro = getClass().getResource("/com/mycompany/prg9/imagenes/filtrar.png");
-        Image imgFiltro = new Image(filtro.toString(), 20, 20, false, true);
+        Image imgFiltro = new Image(filtro.toString(), 20, 20, false, false);
         filtrar.setGraphic(new ImageView(imgFiltro));
         URL buscar = getClass().getResource("/com/mycompany/prg9/imagenes/buscar.png");
         Image imgBuscar = new Image(buscar.toString(), 20, 20, false, true);
@@ -330,6 +336,13 @@ public class PruebaPrincipalController implements Initializable {
         Image imgDespues = new Image(linkDespues.toString(), 20, 20, false, true);
          btnAtras.setGraphic(new ImageView(imgAntes));
         btnAdelante.setGraphic(new ImageView(imgDespues));
+        URL listaD = getClass().getResource("/com/mycompany/prg9/imagenes/listaDeseos.png");
+        Image imgListaD = new Image(listaD.toString(), 20, 20, false, true);
+        botonListaDeseos.setGraphic(new ImageView(imgListaD));
+        URL inicioS = getClass().getResource("/com/mycompany/prg9/imagenes/inicioSesion.png");
+        Image imgInicioS = new Image(inicioS.toString(), 20, 20, false, true);
+        botonIniciarSesion.setGraphic(new ImageView(imgInicioS));
+        
         
     }
 
@@ -374,6 +387,9 @@ public class PruebaPrincipalController implements Initializable {
             nombreYEliminar.getChildren().add(new Label(album.getNombre()));
             nombreYEliminar.setSpacing(20);
             Button botonEliminar= new Button("Eliminar");
+            URL eliminar = getClass().getResource("/com/mycompany/prg9/imagenes/borrar.png");
+            Image imgEliminar = new Image(eliminar.toString(), 20, 20, false, true);
+            botonEliminar.setGraphic(new ImageView(imgEliminar));
             botonEliminar.setOnAction(e -> {
                 
 App.listaDeseos.remove(al.getNombre());
