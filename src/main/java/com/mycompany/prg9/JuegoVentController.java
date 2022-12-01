@@ -209,16 +209,20 @@ public class JuegoVentController implements Comparable<Comentario>{
     }
     @FXML
     private void enDeseos() throws IOException {
+        if(App.inicioSesion){
+            if(!App.listaDeseos.contains(albumSeleccionado.getNombre())){
+                App.listaDeseos.addLast(albumSeleccionado.getNombre());
+        String lineaDeseados;
+        String[] lineaSplit;
+        ArrayList<String> lineas= new ArrayList<>();
         try(BufferedReader bufferedReader =new BufferedReader(new FileReader("archivos/usuarios.txt"))){
             String linea;
             int x=0;
-            ArrayList<String> lineas= new ArrayList<>();
+            
             while((linea=bufferedReader.readLine())!=null){
                 lineas.addLast(linea);
             }
-            for(String l:lineas){
-            
-        }
+            bufferedReader.close();
         }catch (IOException ex) { 
             ex.printStackTrace();
         }
@@ -227,10 +231,31 @@ public class JuegoVentController implements Comparable<Comentario>{
 		try {
 			File fichero = new File("archivos/usuarios.txt");
 			System.out.println(fichero.getCanonicalPath()); // Path completodonde se creará el fichero.
-			bw = new BufferedWriter(new FileWriter(fichero,true));
-			bw.newLine();
-                      //  bw.write(textUsuario.getText()+";"+textPassword.getText()+";,");
-                        //texto.setText("Usuario creado correctamente");
+			bw = new BufferedWriter(new FileWriter(fichero));                        
+                        for(String l:lineas){
+          
+            lineaSplit=l.split(";");
+            if(lineaSplit[0].equals(App.usuarioIniciado)){
+                lineaDeseados=lineaSplit[2];
+                if(lineaSplit[2].charAt(0)==','){
+                lineaDeseados=albumSeleccionado.getNombre();
+                }else{
+                    lineaDeseados=lineaDeseados+","+albumSeleccionado.getNombre();
+                }
+
+                lineaSplit[2]=lineaDeseados;
+            String lineaDeArchivo="";
+            for(int x=0;x<2;x++){
+                lineaDeArchivo+=lineaSplit[x]+";";
+            }
+            lineaDeArchivo+=lineaDeseados;
+            bw.write(lineaDeArchivo);
+            bw.newLine();
+            }else{
+                  bw.write(l);
+            bw.newLine();
+            }
+        }
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -239,7 +264,9 @@ public class JuegoVentController implements Comparable<Comentario>{
 			} catch (Exception e) {
 			}
     }
-
+        }
+        }
+        
     }
     
 

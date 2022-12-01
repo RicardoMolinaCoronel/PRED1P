@@ -52,7 +52,10 @@ public class ArrayList<E> implements List<E>, Iterable<E>,Serializable {
         arreglo[0] = e;
         return true;
     }
-
+    public boolean remove(E e){
+        int indice= indexOf(e);
+        return remove(indice);
+    }
     public boolean addLast(E e) {
         try {
             if (capacidad == ultimo + 1) {

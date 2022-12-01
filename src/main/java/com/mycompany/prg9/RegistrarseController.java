@@ -46,6 +46,7 @@ public class RegistrarseController implements Initializable {
     }
     @FXML
     private void registrarse() throws IOException {
+        if(!(textUsuario.getText().equals("") || textPassword.getText().equals(""))){
          try(BufferedReader bufferedReader =new BufferedReader(new FileReader("archivos/usuarios.txt"))){
             String linea;
             while((linea=bufferedReader.readLine())!=null){
@@ -66,6 +67,7 @@ public class RegistrarseController implements Initializable {
 			System.out.println(fichero.getCanonicalPath()); // Path completodonde se creará el fichero.
 			bw = new BufferedWriter(new FileWriter(fichero,true));
 			bw.newLine();
+                        
                         bw.write(textUsuario.getText()+";"+textPassword.getText()+";,");
                         texto.setText("Usuario creado correctamente");
 		} catch (IOException e) {
@@ -76,6 +78,8 @@ public class RegistrarseController implements Initializable {
 			} catch (Exception e) {
 			}
     }
-    
+        }else{
+        texto.setText("Rellene todos los campos");
+        }
 }
 }

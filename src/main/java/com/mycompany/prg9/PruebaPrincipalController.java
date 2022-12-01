@@ -8,6 +8,11 @@ import com.mycompany.classes.Album;
 import com.mycompany.classes.BibliotecaJuegos;
 import com.mycompany.classes.JuegoC;
 import com.mycompany.prg9.App;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -96,9 +101,10 @@ public class PruebaPrincipalController implements Initializable {
        if(App.inicioSesion){
            App.inicioSesion=false;
            App.usuarioIniciado=null;
-           App.listaDeseos=null;
+           App.listaDeseos= new ArrayList<>();
            botonIniciarSesion.setText("Iniciar Sesión");
            usuario.setText("");
+           App.setRoot("pruebaPrincipal");
        }else{
                   App.setRoot("iniciarSesion");
        }
@@ -334,6 +340,13 @@ public class PruebaPrincipalController implements Initializable {
     @FXML
     private void listaDeseos(ActionEvent event) throws IOException{
         if(App.inicioSesion){
+   cargarJuegosDeseos();
+        }else{
+            App.setRoot("iniciarSesion");
+        }
+    }
+    private void cargarJuegosDeseos(){
+
         btnInicio.setVisible(true);
         biblioteca.getChildren().clear();
       for(Album al: BibliotecaJuegos.getListaAlbumes()){
@@ -357,7 +370,73 @@ public class PruebaPrincipalController implements Initializable {
             
             
             vboxalbum.getChildren().add(imgview);
-            vboxalbum.getChildren().add(new Label(album.getNombre()));
+            HBox nombreYEliminar= new HBox();
+            nombreYEliminar.getChildren().add(new Label(album.getNombre()));
+            nombreYEliminar.setSpacing(20);
+            Button botonEliminar= new Button("Eliminar");
+            botonEliminar.setOnAction(e -> {
+                
+App.listaDeseos.remove(al.getNombre());
+ String lineaDeseados="";
+        String[] lineaSplit;
+        ArrayList<String> lineas= new ArrayList<>();
+        try(BufferedReader bufferedReader =new BufferedReader(new FileReader("archivos/usuarios.txt"))){
+            String linea;
+            int x=0;
+            
+            while((linea=bufferedReader.readLine())!=null){
+                lineas.addLast(linea);
+            }
+            bufferedReader.close();
+        }catch (IOException ex) { 
+            ex.printStackTrace();
+        }
+        
+        BufferedWriter bw = null;
+		try {
+			File fichero = new File("archivos/usuarios.txt");
+			System.out.println(fichero.getCanonicalPath()); // Path completodonde se creará el fichero.
+			bw = new BufferedWriter(new FileWriter(fichero));                        
+                        for(String l:lineas){
+          
+            lineaSplit=l.split(";");
+            if(lineaSplit[0].equals(App.usuarioIniciado)){
+            int i=0;    
+                for(String s:App.listaDeseos){
+                    if(i!=0){
+                lineaDeseados+=(",");
+                i++;
+                    }
+                    lineaDeseados+=(s);
+                }               
+                if(lineaDeseados.equals("")){
+                    lineaDeseados+=",";
+                }
+                lineaSplit[2]=lineaDeseados;
+            String lineaDeArchivo="";
+            for(int x=0;x<2;x++){
+                lineaDeArchivo+=lineaSplit[x]+";";
+            }
+            lineaDeArchivo+=lineaDeseados;
+            bw.write(lineaDeArchivo);
+            bw.newLine();
+            }else{
+                  bw.write(l);
+            bw.newLine();
+            }
+        }
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				bw.close(); // Cerramos el buffer
+			} catch (Exception ex) {
+			}
+                         cargarJuegosDeseos();
+    }
+        });
+            nombreYEliminar.getChildren().add(botonEliminar);
+            vboxalbum.getChildren().add(nombreYEliminar);
             //vboxalbum.getChildren().add(new Label(album.getDescripcion()));
             
             biblioteca.getChildren().add(vboxalbum);
@@ -402,10 +481,9 @@ public class PruebaPrincipalController implements Initializable {
            }
         
         } 
-        }
         
-    }
-
+        
+    } 
     @FXML
     private void buscarJuego() {
         btnInicio.setVisible(true);
