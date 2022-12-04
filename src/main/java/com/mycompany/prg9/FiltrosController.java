@@ -146,8 +146,11 @@ public class FiltrosController implements Initializable {
         
         ArrayList<JuegoC> juegosFiltrados = JuegoC.cargarJuegos(tituloSeleccionado, añoSeleccionado, generoSeleccionado);
         
-        
+        for(Album al:BibliotecaJuegos.getListaAlbumes()){
+            
         for(JuegoC j: juegosFiltrados){
+            if(al.getNombre().toLowerCase().contains(j.getNombre().toLowerCase())){
+                Album album=al;
             //FileInputStream stream = new FileInputStream("/com/mycompany/prg9/imagenes/"+j.getNombre()+".jpg");
             
             //Creando la imagen
@@ -164,13 +167,47 @@ public class FiltrosController implements Initializable {
             
             VBox juegos = new VBox(imvJuego,lblNombreJuego);
             mostrador.getChildren().add(juegos);
+            juegos.setOnMouseClicked(eh-> {
+               if(eh.getClickCount()==1){
+                  //lbumSeleccion=album;
+                   //txtAlbumSel.setText("Álbum seleccionado: "+album.getNombre());
+               }
+               if(eh.getClickCount()==2){
+                try {
+                    if(album.getFotosDelAlbum().length()!=0){
+                    BibliotecaJuegos.setAlbumSelec(al);
+                    App.setRoot("juegoVent");
+                    }
+                    else{
+                        
+                       Alert alerta= new Alert(Alert.AlertType.CONFIRMATION);
+                       alerta.setTitle("Diálogo de información");
+                       alerta.setHeaderText("Álbum vacío");
+                       alerta.setContentText("El álbum está vacío, quiere agregar una foto?");
+                       Optional<ButtonType> result=alerta.showAndWait();
             
+                       if(result.get()==ButtonType.OK){
+                            //BibliotecaJuegos.setAlbumSelec(album);
+                            App.setRoot("agregarFoto2");
+                       }
+                       
+                       else{
+                           App.setRoot("MenuPrincipal");
+                       }
+                       
+                    }
+                } catch (IOException ex) {
+                }
+               }
+            });
            
            
+        }
         }
        
        
         
+    }
     }
   
     
