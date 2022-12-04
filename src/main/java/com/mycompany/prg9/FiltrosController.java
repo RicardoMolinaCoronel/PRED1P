@@ -4,19 +4,36 @@
  */
 package com.mycompany.prg9;
 
+import com.mycompany.classes.Album;
+import com.mycompany.classes.BibliotecaJuegos;
+import com.mycompany.classes.Genero;
+import com.mycompany.classes.JuegoC;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import tdas.*;
 import javafx.scene.layout.VBox;
+
+
 
 /**
  * FXML Controller class
@@ -33,14 +50,26 @@ public class FiltrosController implements Initializable {
     
     @FXML
     private ComboBox cbCalificacion2;
-    
+    /*
     @FXML
     private VBox vBGeneros;
+    */
+    
+    @FXML
+    private ComboBox cbGeneros;
+    
     @FXML
     private Button btnVolver;
     
+    @FXML
+    private TextField tfTitulo;
     
-    public ArrayList<String> crearColeccion(){
+    @FXML
+    private FlowPane mostrador;
+    
+   
+    
+    public ArrayList<String> crearColeccion(){   //CREAR LISTA DE LAS FECHAS DE LANZAMIENTO
         ArrayList<String> fechas = new ArrayList<>();
         
         int fechaActual;
@@ -51,7 +80,7 @@ public class FiltrosController implements Initializable {
         return fechas;
     }
     
-    public ArrayList<String> coleccionEstrellas(){
+    public ArrayList<String> coleccionEstrellas(){ //COLECCION DE ESTRELLAS DE CALIFICACION
         
         ArrayList<String> estrellas= new ArrayList<>();
         
@@ -61,30 +90,20 @@ public class FiltrosController implements Initializable {
         
        return estrellas;
     }
+  
+   
     
-    public ArrayList<String> coleccionGeneros(){
-        
-        ArrayList<String> generos = new ArrayList<>();
-        
-        generos.add("Aventura");
-        generos.add("Arcade");
-        generos.add("Acción");
-        generos.add("Deportes");
-        generos.add("Estrategia");
-        generos.add("Simulación");
-        
-        return generos;
-                
+    public void llenarCbGeneros(){ //METODO PARA LLENAR EL CB DE GENEROS
+       ArrayList<String> listaGeneros;
+       listaGeneros = Genero.cargarGeneros();
+       
+       for(String g:listaGeneros){
+            cbGeneros.getItems().add(g);
+       }
+      
+            
     }
-    
-    public void llenarCb(){
-        for(String genero: coleccionGeneros()){
-            CheckBox cb = new CheckBox(genero);
-            vBGeneros.getChildren().add(cb);
-        }
-    }
-    
-   public void llenarCombo(){
+   public void llenarCombo(){ //METODO PARA LLENAR EL CB DE FECHAS
        
       for(String fecha: crearColeccion()){
           cbFecha.getItems().add(fecha);
@@ -92,7 +111,7 @@ public class FiltrosController implements Initializable {
       }
    }
    
-   public void llenarComboEstrellas(){
+   public void llenarComboEstrellas(){ //LLENA EL CB DE ESTRELLAS DE CALIFICACION
        
        for(String estrella: coleccionEstrellas()){
            cbCalificacion1.getItems().add(estrella);
@@ -112,20 +131,60 @@ public class FiltrosController implements Initializable {
         // TODO
        llenarCombo();
        llenarComboEstrellas();
-       llenarCb();
+       llenarCbGeneros();
        colocarImagenBoton();
     }    
 
     @FXML
+    public void mostrarJuegos(ActionEvent e) throws IOException{
+        
+        mostrador.getChildren().clear();
+        
+        String generoSeleccionado = (String) cbGeneros.getValue();
+        String añoSeleccionado = (String) cbFecha.getValue();
+        String tituloSeleccionado = tfTitulo.getText();
+        
+        ArrayList<JuegoC> juegosFiltrados = JuegoC.cargarJuegos(tituloSeleccionado, añoSeleccionado, generoSeleccionado);
+        
+        
+        for(JuegoC j: juegosFiltrados){
+            //FileInputStream stream = new FileInputStream("/com/mycompany/prg9/imagenes/"+j.getNombre()+".jpg");
+            
+            //Creando la imagen
+            /*Image imagenJuego = new Image(stream);
+            
+            ImageView imvJuego = new ImageView(imagenJuego);*/
+            
+            URL juego = getClass().getResource("/com/mycompany/prg9/imagenes/"+j.getNombre()+".jpg");
+            Image imgJuego = new Image(juego.toString(),200,300,false,false);
+            ImageView imvJuego = new ImageView(imgJuego);
+            //Creando labels
+            Label lblNombreJuego = new Label(j.getNombre());
+            //Creando Vbox
+            
+            VBox juegos = new VBox(imvJuego,lblNombreJuego);
+            mostrador.getChildren().add(juegos);
+           
+        }
+       
+       
+        
+    }
+  
+    
+   @FXML
     private void volver(ActionEvent event) throws IOException{
         App.setRoot("pruebaPrincipal");
     }
-    
+   
      private void colocarImagenBoton() {
        
         URL linkAtras = getClass().getResource("/com/mycompany/prg9/imagenes/atras.png");
         Image imgAtras = new Image(linkAtras.toString(), 20, 20, false, true);
         btnVolver.setGraphic(new ImageView(imgAtras));
     }
-    
+
+   
+         
+  
 }

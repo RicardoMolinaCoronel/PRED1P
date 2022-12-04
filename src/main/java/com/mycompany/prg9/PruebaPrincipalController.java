@@ -350,6 +350,7 @@ public class PruebaPrincipalController implements Initializable {
     private void filtrarJuego(ActionEvent event) throws IOException{
         App.setRoot("filtros");
     }
+    
     @FXML
     private void listaDeseos(ActionEvent event) throws IOException{
         if(App.inicioSesion){
@@ -513,7 +514,7 @@ App.listaDeseos.remove(al.getNombre());
        
         for(Album al: BibliotecaJuegos.getListaAlbumes()){
            // System.out.println(al);
-           if(al.getNombre().toLowerCase().startsWith(busqueda.toLowerCase())){
+           if(al.getNombre().toLowerCase().contains(busqueda.toLowerCase())){
             Album album=al;
             
 

@@ -209,10 +209,12 @@ public class JuegoVentController implements Comparable<Comentario>{
 
     @FXML
     private void mostrarAnt() {
+        iterador.previous();
         fotoSeleccionada = iterador.previous();
         //System.out.println(fotoSeleccionada);
         // System.out.println("hola");
         ImgMos.setImage(fotoSeleccionada.getImagen());
+        iterador.next();
     }
 
     @FXML
