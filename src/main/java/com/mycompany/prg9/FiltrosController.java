@@ -143,8 +143,9 @@ public class FiltrosController implements Initializable {
         String generoSeleccionado = (String) cbGeneros.getValue();
         String añoSeleccionado = (String) cbFecha.getValue();
         String tituloSeleccionado = tfTitulo.getText();
+        //int calificacionSeleccionada = (int) cbCalificacion1.getValue();
         
-        ArrayList<JuegoC> juegosFiltrados = JuegoC.cargarJuegos(tituloSeleccionado, añoSeleccionado, generoSeleccionado);
+        ArrayList<JuegoC> juegosFiltrados = JuegoC.cargarJuegos(tituloSeleccionado, añoSeleccionado, generoSeleccionado );
         
         for(Album al:BibliotecaJuegos.getListaAlbumes()){
             

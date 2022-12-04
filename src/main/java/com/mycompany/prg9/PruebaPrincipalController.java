@@ -514,7 +514,7 @@ App.listaDeseos.remove(al.getNombre());
        
         for(Album al: BibliotecaJuegos.getListaAlbumes()){
            // System.out.println(al);
-           if(al.getNombre().toLowerCase().contains(busqueda.toLowerCase())){
+           if(al.getNombre().toLowerCase().startsWith(busqueda.toLowerCase())){
             Album album=al;
             
 

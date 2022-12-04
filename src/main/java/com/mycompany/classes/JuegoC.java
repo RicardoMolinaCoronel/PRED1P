@@ -43,33 +43,33 @@ public class JuegoC implements Serializable{
                 String desarrollador = datos[1];
                 String fLanzamiento = datos[2];
                 String genero = datos[3];
-                String descripción = datos[4];
+                String descripcion = datos[4];
                 
                 String[] fecha = datos[2].split("/");
                 String anio= fecha[2];
                 
                 
-                if(nombre.trim().toLowerCase().contains(nom.trim().toLowerCase()) && gen == null && fechaJuego == null){
-                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,desarrollador));
+                if(nombre.trim().toLowerCase().contains(nom.trim().toLowerCase()) && gen == null && fechaJuego == null ){
+                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,descripcion));
                     
                 }else if(nom==null && genero.equals(gen) && fechaJuego == null){
-                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,desarrollador));
+                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,descripcion));
                     
                 }else if(nom==null && gen == null && fLanzamiento.trim().contains(fechaJuego)){
-                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,desarrollador));
+                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,descripcion));
                     
                 }else if(nombre.trim().toLowerCase().contains(nom.trim().toLowerCase()) && genero.equals(gen) && fechaJuego == null ){
-                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,desarrollador));
+                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,descripcion));
                     
                 }else if(nombre.trim().toLowerCase().contains(nom.trim().toLowerCase()) && gen == null && fLanzamiento.trim().contains(fechaJuego) ){
-                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,desarrollador));
+                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,descripcion));
                     
                 }else if(nom == null && genero.equals(gen) && fLanzamiento.trim().contains(fechaJuego)){
-                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,desarrollador));
+                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,descripcion));
                     
                 }else if(nombre.trim().toLowerCase().contains(nom.trim().toLowerCase()) && genero.equals(gen) && fLanzamiento.trim().contains(fechaJuego)){
-                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,desarrollador));
-            }
+                    jg.add(new JuegoC(nombre,desarrollador,fLanzamiento,gen,descripcion));                
+                }
     }
         return jg;
     }
@@ -86,6 +86,7 @@ public class JuegoC implements Serializable{
         this.fecha = fecha;
         this.genero=genero;
         this.descripcion = descripcion;
+  
     }
     
     
