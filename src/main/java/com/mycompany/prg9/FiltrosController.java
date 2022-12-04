@@ -164,6 +164,8 @@ public class FiltrosController implements Initializable {
             
             VBox juegos = new VBox(imvJuego,lblNombreJuego);
             mostrador.getChildren().add(juegos);
+            
+           
            
         }
        
