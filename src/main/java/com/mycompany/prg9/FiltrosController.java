@@ -6,8 +6,10 @@ package com.mycompany.prg9;
 
 import com.mycompany.classes.Album;
 import com.mycompany.classes.BibliotecaJuegos;
+import com.mycompany.classes.Comentario;
 import com.mycompany.classes.Genero;
 import com.mycompany.classes.JuegoC;
+import static com.mycompany.prg9.JuegoVentController.juego;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -42,6 +44,7 @@ import javafx.scene.layout.VBox;
  */
 public class FiltrosController implements Initializable {
     
+    
     @FXML
     private ComboBox cbFecha;
     
@@ -66,6 +69,9 @@ public class FiltrosController implements Initializable {
     
     @FXML
     private FlowPane mostrador;
+    
+    public static JuegoC juego = new JuegoC();
+    public ArrayList<JuegoC>listaJ=new ArrayList<JuegoC>();
     
    
     
@@ -137,19 +143,20 @@ public class FiltrosController implements Initializable {
 
     @FXML
     public void mostrarJuegos(ActionEvent e) throws IOException{
-        
+        todosJuegos();
         mostrador.getChildren().clear();
         
         String generoSeleccionado = (String) cbGeneros.getValue();
         String añoSeleccionado = (String) cbFecha.getValue();
         String tituloSeleccionado = tfTitulo.getText();
-        //int calificacionSeleccionada = (int) cbCalificacion1.getValue();
-        
-        ArrayList<JuegoC> juegosFiltrados = JuegoC.cargarJuegos(tituloSeleccionado, añoSeleccionado, generoSeleccionado );
+    
+        if(cbCalificacion1.getValue()==null && cbCalificacion2.getValue()==null){
+        ArrayList<JuegoC> juegosFiltrados = JuegoC.cargarJuegos(tituloSeleccionado, añoSeleccionado, generoSeleccionado);
         
         for(Album al:BibliotecaJuegos.getListaAlbumes()){
             
         for(JuegoC j: juegosFiltrados){
+            
             if(al.getNombre().toLowerCase().contains(j.getNombre().toLowerCase())){
                 Album album=al;
             //FileInputStream stream = new FileInputStream("/com/mycompany/prg9/imagenes/"+j.getNombre()+".jpg");
@@ -205,11 +212,85 @@ public class FiltrosController implements Initializable {
            
         }
         }
-       
+        }
        
         
     }
+        else{
+        int valor1 = Integer.valueOf((String)cbCalificacion1.getValue());
+         
+        int valor2 =Integer.valueOf((String)cbCalificacion2.getValue());
+      
+       ArrayList<JuegoC> juegosFiltrados = JuegoC.cargarJuegos(tituloSeleccionado, añoSeleccionado, generoSeleccionado);
+        
+        for(Album al:BibliotecaJuegos.getListaAlbumes()){
+        for(JuegoC j: juegosFiltrados){
+            
+            if((promedio(j)>=valor1&&promedio(j)<=valor2)||(promedio(j)>=valor2&&promedio(j)<=valor1)){
+            if(al.getNombre().toLowerCase().contains(j.getNombre().toLowerCase())){
+                Album album=al;
+            //FileInputStream stream = new FileInputStream("/com/mycompany/prg9/imagenes/"+j.getNombre()+".jpg");
+            
+            //Creando la imagen
+            /*Image imagenJuego = new Image(stream);
+            
+            ImageView imvJuego = new ImageView(imagenJuego);*/
+            
+            URL juego = getClass().getResource("/com/mycompany/prg9/imagenes/"+j.getNombre()+".jpg");
+            Image imgJuego = new Image(juego.toString(),200,300,false,false);
+            ImageView imvJuego = new ImageView(imgJuego);
+            //Creando labels
+            Label lblNombreJuego = new Label(j.getNombre());
+            //Creando Vbox
+            
+            VBox juegos = new VBox(imvJuego,lblNombreJuego);
+            mostrador.getChildren().add(juegos);
+            juegos.setOnMouseClicked(eh-> {
+               if(eh.getClickCount()==1){
+                  //lbumSeleccion=album;
+                   //txtAlbumSel.setText("Álbum seleccionado: "+album.getNombre());
+               }
+               if(eh.getClickCount()==2){
+                try {
+                    if(album.getFotosDelAlbum().length()!=0){
+                    BibliotecaJuegos.setAlbumSelec(al);
+                    App.setRoot("juegoVent");
+                    }
+                    else{
+                        
+                       Alert alerta= new Alert(Alert.AlertType.CONFIRMATION);
+                       alerta.setTitle("Diálogo de información");
+                       alerta.setHeaderText("Álbum vacío");
+                       alerta.setContentText("El álbum está vacío, quiere agregar una foto?");
+                       Optional<ButtonType> result=alerta.showAndWait();
+            
+                       if(result.get()==ButtonType.OK){
+                            //BibliotecaJuegos.setAlbumSelec(album);
+                            App.setRoot("agregarFoto2");
+                       }
+                       
+                       else{
+                           App.setRoot("MenuPrincipal");
+                       }
+                       
+                    }
+                } catch (IOException ex) {
+                }
+               }
+            });
+           
+           
+        }
+        }
+        }
+       
+             }
+        }
     }
+        
+    
+    
+    
   
     
    @FXML
@@ -226,5 +307,19 @@ public class FiltrosController implements Initializable {
 
    
          
-  
+  public void todosJuegos(){
+      for(JuegoC j:juego.lecturaJuego()){
+          juego=new JuegoC(j.getNombre(), j.getDesarrollador(), j.getFecha(), j.getGenero(), j.getDescripcion());
+          listaJ.add(juego);
+      }
+  }
+   public int promedio(JuegoC j){
+    ArrayList<Comentario>comentarios = Comentario.lecturaAlbum(j.getNombre());
+    double resultado = 0;
+    for(Comentario c:comentarios){
+        resultado+=c.getCalificacion();
+    }
+
+    return (int)(Math.round(resultado/comentarios.size()));
+    }
 }
